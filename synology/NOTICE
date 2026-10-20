@@ -3,7 +3,7 @@ Audiobookshelf for Syno Package Land
 Integration: Copyright (c) 2026 synopackageland, MIT (LICENSE).
 Audiobookshelf: its contributors, GNU GPL version 3 (../LICENSE).
 Source: https://github.com/advplyr/audiobookshelf
-Official image: ghcr.io/advplyr/audiobookshelf
+Official image: docker.io/advplyr/audiobookshelf
 
 The upstream source and Docker image are unmodified. All integration is under
 synology/. image-lock.json records the release source, immutable multi-platform

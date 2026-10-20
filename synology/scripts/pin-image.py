@@ -21,7 +21,7 @@ class RegistryHTTPError(Exception):
 
 
 def resolve(tag, commit, source_tree, build):
-    origin = json.loads(os.environ.get('SYNOPKGLAND_COMPOSE_REGISTRY_MIRRORS', '{}')).get('ghcr.io', 'https://ghcr.io')
+    origin = json.loads(os.environ.get('SYNOPKGLAND_COMPOSE_REGISTRY_MIRRORS', '{}')).get('docker.io', 'https://registry-1.docker.io')
     parsed = urllib.parse.urlsplit(origin)
     if parsed.scheme != 'https' or not parsed.netloc or parsed.username or parsed.query or parsed.fragment or parsed.path not in ('', '/'):
         raise SystemExit('Registry transport must be an HTTPS origin')
@@ -113,7 +113,7 @@ def resolve(tag, commit, source_tree, build):
         platforms.append({'os': 'linux', 'architecture': architecture, 'manifest_digest': manifest_digest,
                           'config_digest': config_digest, 'source_commit': commit, 'version': tag})
     return {'tag': tag, 'upstream_commit': commit, 'source_tree': source_tree, 'build': build,
-            'repository': REPOSITORY, 'reference': 'ghcr.io/' + REPOSITORY + ':' + tag + '@' + index_digest,
+            'repository': REPOSITORY, 'reference': 'docker.io/' + REPOSITORY + ':' + tag + '@' + index_digest,
             'index_digest': index_digest, 'index_media_type': index['mediaType'],
             'platforms': platforms, 'distribution': 'official upstream registry; DSM Container Manager downloads the image'}
 

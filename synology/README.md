@@ -60,7 +60,7 @@ It never uploads local credentials or SDK/CLI sources.
 
 `SPL_NPM_REGISTRY` can select an operator-approved npm mirror.
 `SYNOPKGLAND_COMPOSE_REGISTRY_MIRRORS` changes metadata transport only; the final
-SPK still references official GHCR digests. Do not modify NAS daemon/CA settings
+SPK still references official Docker Hub digests. Do not modify NAS daemon/CA settings
 or substitute image bytes. Device results and transport limits are in
 [validation.md](docs/validation.md); the reusable browser suite is documented in
 [e2e.md](docs/e2e.md). Credentials and raw device evidence never belong in Git.

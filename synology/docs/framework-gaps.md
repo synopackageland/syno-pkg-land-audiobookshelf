@@ -6,7 +6,6 @@
 | Ordinary DSM users | The Compose gateway does not enforce the requested per-App Application Privileges contract. | Keep admins-only; implement generic permission enforcement, then test allowed and denied ordinary users. |
 | Account deletion | No native deletion adapter is declared. Upstream has supported APIs but the bootstrap credential is private to its named volume. | Add a bounded credential-safe adapter through the existing bridge; define session/progress retention and test deletion. |
 | Delete-data uninstall | SDK retains named container volumes even when delete-data is selected. The wizard reports the exact retained volume. | Preserve honest warnings and independent readback; implement generic volume lifecycle before promising erasure. |
-| Official registry installation | Build/inspect validate official immutable references. The test device denied direct GHCR pulls. | Restore registry reachability and rerun installation of the unmodified final SPK. Mirror diagnostic results do not certify that transport. |
 
 Containers have fixed package filesystem authority. OIDC accounts do not inherit
 DSM per-user file ACLs. Source read-only mounts cannot stop an already-open stream;
