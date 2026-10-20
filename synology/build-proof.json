@@ -1,0 +1,27 @@
+{
+  "toolchain": {
+    "cli": "0.19.0",
+    "templates": "0.19.0",
+    "sdk": "0.19.0",
+    "app": "0.19.0",
+    "ui": "0.12.5",
+    "executorTag": "executor/v0.19.0",
+    "goToolchain": "go1.26.9"
+  },
+  "checks": {
+    "check": true,
+    "build": true,
+    "inspect": true
+  },
+  "official_image": "ghcr.io/advplyr/audiobookshelf:2.37.1@sha256:581d68b2a6fc7ebf58d81c878a9f387cbbc0d88ac9d37b298b9cee10168af85b",
+  "artifacts": {
+    "SynoPkgAudiobookshelf-2.37.1-0001-x86_64.spk": "7d5f3c417982789d35bdc57ccabd8c02ecb19567de261529c40054d78efc5168"
+  },
+  "source_overrides": {
+    "SYNOPKGLAND_SDK_DIR": "6f58211ce8cd0f6a7bbb41ed4dac883fca036e5c",
+    "SPL_CLI_DIR": "86631612d385e58cb8745ba1431eb5ca4b087cb5"
+  },
+  "publishable": false,
+  "shared_folder_activation_supported": true,
+  "device_acceptance_complete": false
+}
