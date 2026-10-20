@@ -1,0 +1,29 @@
+{
+  "tag": "2.37.1",
+  "upstream_commit": "3563d49424d50170324de9236a24c591b6d965e9",
+  "source_tree": "57cad5894a8c6b3387c1e05330157b5eb84268b7",
+  "build": 1,
+  "repository": "advplyr/audiobookshelf",
+  "reference": "docker.io/advplyr/audiobookshelf:2.37.1@sha256:581d68b2a6fc7ebf58d81c878a9f387cbbc0d88ac9d37b298b9cee10168af85b",
+  "index_digest": "sha256:581d68b2a6fc7ebf58d81c878a9f387cbbc0d88ac9d37b298b9cee10168af85b",
+  "index_media_type": "application/vnd.oci.image.index.v1+json",
+  "platforms": [
+    {
+      "os": "linux",
+      "architecture": "amd64",
+      "manifest_digest": "sha256:10f3490855630aa024ba618b90ba6f58f3d9d7063dd77e1d1e958fdc4ede7c70",
+      "config_digest": "sha256:da452ea368f8bc126ef998175f726f9be995954ccdd38fccb063e0e460b1912d",
+      "source_commit": "3563d49424d50170324de9236a24c591b6d965e9",
+      "version": "2.37.1"
+    },
+    {
+      "os": "linux",
+      "architecture": "arm64",
+      "manifest_digest": "sha256:4a1029867755efae922b562be89d4a842e7325f486f506c47241eab60fa9b431",
+      "config_digest": "sha256:2225a3e2123938c2917c06ff17a56715eeca6e2c98a1738def7c8e11cef05271",
+      "source_commit": "3563d49424d50170324de9236a24c591b6d965e9",
+      "version": "2.37.1"
+    }
+  ],
+  "distribution": "official upstream registry; DSM Container Manager downloads the image"
+}

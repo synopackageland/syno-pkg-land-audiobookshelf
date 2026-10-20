@@ -1,0 +1,26 @@
+# Audiobookshelf integration
+
+Keep all package-owned changes under synology/. Do not edit upstream source.
+Keep the recorded release pins. The integration candidate is validated with an
+explicit local CLI/SDK source override; do not publish that development artifact.
+Read the installed CLI's compose and identity-gateway guides before changes.
+The explicit task chooses embedded OIDC over the scaffold's older header defaults.
+
+Use the official image at the recorded immutable digest. The package account,
+cap_drop ALL, no-new-privileges, read-only rootfs and loopback listeners are required.
+Use SDK storage_init for private storage and secret delivery. Configure upstream
+through supported APIs; never edit its database or add another identity service.
+
+Use install.sharedFolder mode select with matching compose.shares select install.
+Default media access is read-only; selection does not grant package-user ACLs.
+Guide the administrator to grant the fixed package identity permission in DSM.
+Do not expose all DSM users: Compose lacks the required Application Privileges
+check. The first candidate is administrator-only. Do not claim account deletion
+or immediate session revocation until the native bridge is implemented and tested.
+
+Run the affected tests on an authorized Linux build host, then check/build/inspect.
+Never install an artifact that fails inspect. Keep device evidence, credentials,
+profiles and screenshots outside the public repository. Before each commit/push,
+run scripts/public-scan.py with the operator's private denylist and inspect all
+staged paths and artifact contents. Use the public maintainer identity and [skip ci].
+GitHub Actions must remain disabled. Open a PR; publication needs separate approval.

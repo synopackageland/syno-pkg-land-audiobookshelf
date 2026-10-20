@@ -1,0 +1,50 @@
+schema: 2
+package: SynoPkgAudiobookshelf
+version: 2.37.1
+build: 1
+displayname: Audiobookshelf
+description: Audiobooks and podcasts with DSM OpenID Connect sign-in.
+maintainer: synopackageland
+icon: assets/icon.png
+os_min_ver: "7.2.1-69057"
+arches: [x86_64]
+entry: admin-only
+capabilities: {composeMounts: true}
+install:
+  sharedFolder: {mode: select, key: media, permission: ro}
+compose:
+  shares:
+    media:
+      select: install
+      mounts: [{service: web, target: /media}]
+  startup_timeout_seconds: 600
+  files: [compose.yaml, compose.image.yaml]
+  services:
+    web:
+      network: host
+      address_env: HOST
+      storage_init:
+        directories:
+          - {base: /var/tmp, path: audiobookshelf}
+          - {base: /var/tmp, path: audiobookshelf/config}
+          - {base: /var/tmp, path: audiobookshelf/metadata}
+        runtime:
+          environment:
+            ABS_OIDC_SECRET: {oidc_client: audiobookshelf}
+            ABS_BOOTSTRAP_PASSWORD: {secret: bootstrap}
+  web: {service: web, port: 13378, health: {path: /healthcheck, status: 200}}
+  network: {egress: internet}
+identity_gateway:
+  sdk: 0.19.0
+  mode: oidc
+  access: dsm-admins
+  listen: {https: 30443}
+  roles: {admin: admin, user: user}
+  redirects: {/: /audiobookshelf/}
+  oidc:
+    issuer_port: 13380
+    clients:
+      - id: audiobookshelf
+        redirect_paths: [/audiobookshelf/auth/openid/callback]
+        pkce: true
+ui: {launch: new-page}
