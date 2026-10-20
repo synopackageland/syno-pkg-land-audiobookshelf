@@ -1,7 +1,7 @@
 {
   "services": {
     "web": {
-      "image": "ghcr.io/advplyr/audiobookshelf:2.37.1",
+      "image": "docker.io/advplyr/audiobookshelf:2.37.1",
       "entrypoint": [
         "/bin/sh",
         "-eu",
