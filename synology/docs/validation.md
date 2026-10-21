@@ -1,5 +1,25 @@
 # Validation scope
 
+## Released dependency refresh
+
+CLI/templates/SDK/App 0.20.0, executor/v0.20.0 and UI 0.12.5 are used without
+source overrides. npm lock integrity matches the public registry. The unchanged
+x86_64 initial SPK version passes affected tests, check, build and inspect with
+`findings=[]`. The official image and adapter behavior are unchanged.
+
+Fresh installation on DSM 7.3.2 selected an owned synthetic-media share with
+read-only package-account ACL. Native start succeeded. DSM main-menu sign-in,
+media read/playback and native stop/start passed. Native uninstall was followed
+by independent readback: package, containers, project, test-only volumes and
+share were absent. DSM-retained package identities were left in place.
+
+The device's native registry preflight reported `COMPOSE_IMAGE_DENIED`, while
+installation/start completed successfully using the pinned cached image. This
+is not a clean image-pull test. No daemon, mirror, CA or DSM settings changed.
+Browser acceptance used certificate-error tolerance only in its disposable test
+browser. Other lifecycle and identity boundaries below retain their earlier
+bounded evidence; no reboot or broader certification was repeated.
+
 Candidate: upstream v2.37.1, SPK 2.37.1-0001, x86_64. Device: DSM 7.3.2 with
 Container Manager. No reboot, daemon/CA changes or DSM account creation/deletion.
 Raw device evidence, account files, browser profiles and screenshots are private.
@@ -13,9 +33,13 @@ matching amd64/arm64 platform manifests, image configurations and source revisio
 The earlier diagnostic therefore used the same immutable upstream image bytes.
 
 The Docker Hub artifact passed the affected version tests (5/5), render freshness,
-CLI check, release build and inspect. `build-proof.json` records its SHA256 and
-exact development SDK/CLI revisions. Pins remain unchanged; the source-override
-artifact is **not publishable**. All upstream files remain unchanged.
+CLI check, release build and inspect. The release is rebuilt with published
+CLI/templates/SDK/App 0.20.0, UI 0.12.5 and executor/v0.20.0.
+`build-proof.json` records the release artifact SHA-256 and checks.
+All upstream files remain unchanged. The earlier device evidence below used the
+reviewed development implementation of these capabilities; the release dependency
+refresh is verified separately before publication.
+
 
 The builder used a digest-verifying HTTPS metadata transport mirror after its
 direct registry TLS handshake timed out. The SPK keeps the official Docker Hub

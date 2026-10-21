@@ -1,8 +1,8 @@
 # Audiobookshelf for DSM
 
-Integration candidate for upstream **v2.37.1**, SPK **2.37.1-0001**, x86_64,
+DSM package for upstream **v2.37.1**, SPK **2.37.1-0001**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
-All package-owned files are under this directory. This is not a public release.
+All package-owned files are under this directory.
 
 The SDK embedded OIDC provider signs the stable DSM subject. Native OpenID
 registration and automatic login are enabled; matching by email/name is disabled.
@@ -42,21 +42,15 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins stay in `toolchain.json`: CLI/templates/SDK/App 0.19.0, UI 0.12.5,
-executor/v0.19.0. Install-selected Compose shares require the development changes
-SDK `6f58211ce8cd0f6a7bbb41ed4dac883fca036e5c` and CLI
-`86631612d385e58cb8745ba1431eb5ca4b087cb5`. Until those changes are released and
-the pins are deliberately updated, **this candidate requires source overrides**
-and its SPK must not be published.
+Release pins in `toolchain.json` use CLI/templates/SDK/App 0.20.0,
+UI 0.12.5 and executor/v0.20.0. Builds use the published packages and SDK modules.
 
-On an authorized Linux builder, set `SPL_BUILDER_IMAGE`, `SPL_RESOURCE_PREFIX`,
-`SYNOPKGLAND_SDK_DIR` and `SPL_CLI_DIR` to the two checked-out sources, then run
-`python3 scripts/build-linux.py`. It builds the local CLI and runs affected tests,
-render freshness, check, build and inspect. `build-proof.json` records exact
-source revisions, artifact hashes and publication status. Rust work stays on
-Linux. The SSH coordinator `scripts/build.py` accepts `SPL_REMOTE_SDK_DIR` and
-`SPL_REMOTE_CLI_DIR` for checkouts already present on the selected builder.
-It never uploads local credentials or SDK/CLI sources.
+On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and
+`SPL_RESOURCE_PREFIX`, then run `python3 scripts/build-linux.py`. It installs the
+locked npm dependencies and runs affected tests, render freshness, check, build
+and inspect. `build-proof.json` records the toolchain, artifact hashes and results.
+The SSH coordinator `scripts/build.py` copies only integration files and retrieves
+build evidence. Rust work stays on Linux. Credentials never enter the package.
 
 `SPL_NPM_REGISTRY` can select an operator-approved npm mirror.
 `SYNOPKGLAND_COMPOSE_REGISTRY_MIRRORS` changes metadata transport only; the final

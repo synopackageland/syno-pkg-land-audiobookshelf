@@ -1,8 +1,8 @@
 # Audiobookshelf integration
 
 Keep all package-owned changes under synology/. Do not edit upstream source.
-Keep the recorded release pins. The integration candidate is validated with an
-explicit local CLI/SDK source override; do not publish that development artifact.
+Keep the recorded released dependency pins. Build publishable artifacts only with
+the published CLI, templates and SDK modules.
 Read the installed CLI's compose and identity-gateway guides before changes.
 The explicit task chooses embedded OIDC over the scaffold's older header defaults.
 
