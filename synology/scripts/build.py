@@ -18,9 +18,6 @@ run('ssh', host, shlex.join(['mkdir', '-p', remote + '/synology']))
 run('rsync', '-az', '--exclude=node_modules', '--exclude=.artifacts', '--exclude=.synopkgland',
     '--exclude=.e2e', '--exclude=dist', '--exclude=evidence', '--exclude=.cache', str(PKG) + '/', host + ':' + remote + '/synology/')
 env = [k + '=' + os.environ[k] for k in ['SPL_BUILDER_IMAGE', 'SPL_RESOURCE_PREFIX', 'SPL_NPM_REGISTRY', 'SYNOPKGLAND_COMPOSE_REGISTRY_MIRRORS'] if k in os.environ]
-for source, target in [('SPL_REMOTE_SDK_DIR', 'SYNOPKGLAND_SDK_DIR'), ('SPL_REMOTE_CLI_DIR', 'SPL_CLI_DIR')]:
-    if os.environ.get(source):
-        env.append(target + '=' + os.environ[source])
 run('ssh', host, shlex.join(['env', *env, 'python3', remote + '/synology/scripts/build-linux.py']))
 for name in ['package-lock.json', 'build-proof.json', 'dist', 'evidence']:
     run('rsync', '-az', host + ':' + remote + '/synology/' + name, str(PKG) + '/')
