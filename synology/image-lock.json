@@ -2,7 +2,7 @@
   "tag": "2.37.1",
   "upstream_commit": "3563d49424d50170324de9236a24c591b6d965e9",
   "source_tree": "57cad5894a8c6b3387c1e05330157b5eb84268b7",
-  "build": 1,
+  "build": 2,
   "repository": "advplyr/audiobookshelf",
   "reference": "docker.io/advplyr/audiobookshelf:2.37.1@sha256:581d68b2a6fc7ebf58d81c878a9f387cbbc0d88ac9d37b298b9cee10168af85b",
   "index_digest": "sha256:581d68b2a6fc7ebf58d81c878a9f387cbbc0d88ac9d37b298b9cee10168af85b",
