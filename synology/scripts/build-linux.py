@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and inspect inside an operator-selected image; source overrides are opt-in."""
+"""Build and inspect inside an operator-selected image; published dependencies only."""
 import hashlib
 import json
 import os
@@ -11,25 +11,11 @@ ROOT = Path(__file__).resolve().parents[1]
 prefix = os.environ.get('SPL_RESOURCE_PREFIX', 'audiobookshelf-build')
 if not re.fullmatch(r'[a-z0-9-]+', prefix):
     raise SystemExit('Invalid resource prefix')
-if os.environ.get('SYNOPKGLAND_TEMPLATES_DIR'):
-    raise SystemExit('Template source overrides are unsupported')
-overrides = {}
-mounts = []
-for key, destination in [('SYNOPKGLAND_SDK_DIR', '/sdk'), ('SPL_CLI_DIR', '/cli')]:
-    if os.environ.get(key):
-        source = Path(os.environ[key]).resolve(strict=True)
-        revision = subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip()
-        overrides[key] = revision
-        mounts += ['-v', str(source) + ':' + destination, '-e', key + '=' + destination]
 builder = os.environ['SPL_BUILDER_IMAGE']
 evidence = ROOT / 'evidence'
 evidence.mkdir(exist_ok=True)
 command = '''npm ci --ignore-scripts --registry="${SPL_NPM_REGISTRY:-https://registry.npmjs.org}"
 cli=/work/node_modules/.bin/synopkgland
-if [ -n "${SPL_CLI_DIR:-}" ]; then
-  (cd "$SPL_CLI_DIR" && npm ci --ignore-scripts --registry="${SPL_NPM_REGISTRY:-https://registry.npmjs.org}" && npm run build)
-  cli="$SPL_CLI_DIR/dist/bin.js"
-fi
 npm test
 python3 scripts/render-compose.py --check
 node "$cli" check --json > evidence/check.json
@@ -46,13 +32,13 @@ args = ['docker', 'run', '--rm', '--user', os.environ.get('SPL_BUILD_USER', '0:0
 for key in ['SPL_NPM_REGISTRY', 'SYNOPKGLAND_COMPOSE_REGISTRY_MIRRORS']:
     if os.environ.get(key):
         args += ['-e', key + '=' + os.environ[key]]
-subprocess.run([*args, *mounts, builder, 'sh', '-ec', command], check=True)
+subprocess.run([*args, builder, 'sh', '-ec', command], check=True)
 checks = {name: json.loads((evidence / (name + '.json')).read_text())['ok'] for name in ['check', 'build', 'inspect']}
 assert all(checks.values()), checks
 proof = {'toolchain': json.loads((ROOT / 'toolchain.json').read_text()), 'checks': checks,
          'official_image': json.loads((ROOT / 'image-lock.json').read_text())['reference'],
          'artifacts': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((ROOT / 'dist').glob('*.spk'))},
-         'source_overrides': overrides, 'publishable': not bool(overrides),
+         'publishable': True,
          'shared_folder_activation_supported': True, 'device_acceptance_complete': False}
 (ROOT / 'build-proof.json').write_text(json.dumps(proof, indent=2) + '\n')
 print(json.dumps(proof))
