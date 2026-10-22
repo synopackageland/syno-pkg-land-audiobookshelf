@@ -86,3 +86,7 @@ reset to 0001 for a newer release. It never pushes, releases or accesses a NAS.
 Before each commit/push, run `scripts/public-scan.py` with the private operator
 denylist over integration files, expanded SPK payloads, and commit/PR text. Keep
 GitHub Actions disabled, use the public maintainer identity and `[skip ci]`.
+
+## Official package icon
+
+The DSM package uses the official project artwork, preserved unchanged and only resized/rasterized to the required icon sizes. See [assets/icon-source.json](assets/icon-source.json) for the source revision and original SHA-256, and [NOTICE](NOTICE) for attribution and the applicable image license. The package ID remains `SynoPkgAudiobookshelf` for upgrade continuity.
