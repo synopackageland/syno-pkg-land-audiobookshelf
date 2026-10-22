@@ -1,0 +1,79 @@
+{
+  "package": "SynoPkgAudiobookshelf",
+  "version": "2.37.1-0003",
+  "toolchain": {
+    "cli": "0.24.0",
+    "templates": "0.24.0",
+    "sdk": "0.24.0",
+    "app": "0.24.0",
+    "ui": "0.14.0",
+    "executorTag": "executor/v0.24.0",
+    "goToolchain": "go1.26.10"
+  },
+  "check": {
+    "ok": true
+  },
+  "build": {
+    "ok": true
+  },
+  "inspect": {
+    "ok": true,
+    "findings": []
+  },
+  "nas_tested": false,
+  "manifest_sha256": "9ba95d234074ec2ea04ffb2e931c1e7c0b075d1a7f8821aa8e9c6a67eb45bbcb",
+  "lock_sha256": {
+    "package-lock.json": "38f5dba8b99ce40de283a32bda6bfef1ec9a09b0545f3ebb57062c81abf84f0b"
+  },
+  "outputs": [
+    {
+      "file": "SynoPkgAudiobookshelf-2.37.1-0003-x86_64.spk",
+      "sha256": "33a3018f746f9788cf861a80ce28400751eb08f4dcad2b32e04a235f9907cd39",
+      "size": 19943424
+    }
+  ],
+  "go_binaries": [
+    {
+      "arch": "x86_64",
+      "path": "compose/control",
+      "version": "go1.26.10",
+      "sha256": "96659fed7b40d7001f7e26b74111f568af063701a8e4a135559d19889763be90",
+      "upstream_unmodified": false
+    },
+    {
+      "arch": "x86_64",
+      "path": "compose/storage-init",
+      "version": "go1.26.10",
+      "sha256": "56317f79c9785e9a8cd1e0679df6f2514ce240f9ac1a85307f9b5e13dcca0acf",
+      "upstream_unmodified": false
+    },
+    {
+      "arch": "x86_64",
+      "path": "daemon/control",
+      "version": "go1.26.10",
+      "sha256": "d8de3c8a47af34d9516103c50ac065c699c4565bfa94ebdf4baf4cf7c6805b68",
+      "upstream_unmodified": false
+    },
+    {
+      "arch": "x86_64",
+      "path": "daemon/payload/_sso/gateway",
+      "version": "go1.26.10",
+      "sha256": "c821b3da44a5418b139170e6437c20ef29e781ec81971ff8ba91e5410d3b2ff0",
+      "upstream_unmodified": false
+    },
+    {
+      "arch": "x86_64",
+      "path": "ui/sso/authorize.cgi",
+      "version": "go1.26.10",
+      "sha256": "c821b3da44a5418b139170e6437c20ef29e781ec81971ff8ba91e5410d3b2ff0",
+      "upstream_unmodified": false
+    },
+    {
+      "arch": "x86_64",
+      "path": "ui/sso/open.cgi",
+      "version": "go1.26.10",
+      "sha256": "c821b3da44a5418b139170e6437c20ef29e781ec81971ff8ba91e5410d3b2ff0",
+      "upstream_unmodified": false
+    }
+  ]
+}
