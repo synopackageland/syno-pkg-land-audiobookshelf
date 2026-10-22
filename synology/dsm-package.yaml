@@ -35,7 +35,7 @@ compose:
   web: {service: web, port: 13378, health: {path: /healthcheck, status: 200}}
   network: {egress: internet}
 identity_gateway:
-  sdk: 0.23.0
+  sdk: 0.24.0
   mode: oidc
   access: dsm-admins
   listen: {https: 30443}
