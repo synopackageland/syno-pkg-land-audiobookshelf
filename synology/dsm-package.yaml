@@ -1,10 +1,10 @@
 schema: 2
 package: SynoPkgAudiobookshelf
 version: 2.37.1
-build: 3
+build: 4
 displayname: Audiobookshelf
 description: Organize and listen to your audiobooks and podcasts
-maintainer: synopackageland
+maintainer: Syno Package Land
 icon: assets/icon.png
 os_min_ver: "7.2.1-69057"
 arches: [x86_64]
@@ -35,7 +35,7 @@ compose:
   web: {service: web, port: 13378, health: {path: /healthcheck, status: 200}}
   network: {egress: internet}
 identity_gateway:
-  sdk: 0.24.0
+  sdk: 0.26.0
   mode: oidc
   access: dsm-admins
   listen: {https: 30443}
