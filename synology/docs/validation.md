@@ -1,8 +1,18 @@
 # Validation scope
 
+## 2.37.1-0005 SDK 0.28.0 rebuild
+
+Rebuilt with published CLI/templates/SDK/App 0.28.0, executor/v0.27.0, UI 0.14.4
+and go1.26.10, without source overrides. On macOS (offline, no NAS), `npm ci`,
+`npm test` (5/5), `render-compose.py --check`, `synopkgland check --json`
+(ok), `synopkgland build --arch x86_64 --json` (ok) and
+`synopkgland inspect --json` (ok, `findings=[]`) passed. The x86_64 SPK SHA-256 is
+recorded in `security-rebuild.json`. No NAS or device test was run; the SDK's
+slow-NAS startup defaults are not device-verified.
+
 ## Released dependency refresh
 
-CLI/templates/SDK/App 0.20.0, executor/v0.20.0 and UI 0.12.5 are used without
+CLI/templates/SDK/App 0.20.0, executor/v0.20.0 and UI 0.12.5 were used without
 source overrides. npm lock integrity matches the public registry. The unchanged
 x86_64 initial SPK version passes affected tests, check, build and inspect with
 `findings=[]`. The official image and adapter behavior are unchanged.
