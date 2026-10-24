@@ -1,7 +1,7 @@
 schema: 2
 package: SynoPkgAudiobookshelf
 version: 2.37.1
-build: 4
+build: 5
 displayname: Audiobookshelf
 description: Organize and listen to your audiobooks and podcasts
 maintainer: Syno Package Land
@@ -17,7 +17,6 @@ compose:
     media:
       select: install
       mounts: [{service: web, target: /media}]
-  startup_timeout_seconds: 600
   files: [compose.yaml, compose.image.yaml]
   services:
     web:
@@ -35,7 +34,7 @@ compose:
   web: {service: web, port: 13378, health: {path: /healthcheck, status: 200}}
   network: {egress: internet}
 identity_gateway:
-  sdk: 0.26.0
+  sdk: 0.28.0
   mode: oidc
   access: dsm-admins
   listen: {https: 30443}
