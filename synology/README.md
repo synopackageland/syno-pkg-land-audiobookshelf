@@ -1,5 +1,9 @@
 # Audiobookshelf for DSM
 
+## SDK 0.29.1 rebuild
+
+Rebuild 2.37.1-0006 with SDK/App 0.29.1 and CLI/templates 0.29.0, retaining executor/v0.27.0. Upstream images and App configuration are unchanged. No NAS testing was performed for this rebuild.
+
 ## SDK 0.28.0 rebuild
 
 Rebuild 2.37.1-0005 with published SDK/App/CLI/templates 0.28.0 (executor/v0.27.0), UI 0.14.4 and Go 1.26.10, including the SDK's slow-NAS startup defaults. Maintainer: Syno Package Land. Official images and application sources are unchanged. Offline package checks only; no NAS testing was performed.
