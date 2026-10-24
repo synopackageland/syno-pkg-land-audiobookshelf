@@ -17,7 +17,6 @@ compose:
     media:
       select: install
       mounts: [{service: web, target: /media}]
-  startup_timeout_seconds: 600
   files: [compose.yaml, compose.image.yaml]
   services:
     web:
