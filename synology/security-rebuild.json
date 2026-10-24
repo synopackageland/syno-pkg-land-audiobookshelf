@@ -1,11 +1,11 @@
 {
   "package": "SynoPkgAudiobookshelf",
-  "version": "2.37.1-0005",
+  "version": "2.37.1-0007",
   "toolchain": {
-    "cli": "0.28.0",
-    "templates": "0.28.0",
-    "sdk": "0.28.0",
-    "app": "0.28.0",
+    "cli": "0.30.0",
+    "templates": "0.30.0",
+    "sdk": "0.30.2",
+    "app": "0.30.2",
     "ui": "0.14.4",
     "executorTag": "executor/v0.27.0",
     "goToolchain": "go1.26.10"
@@ -21,31 +21,32 @@
     "findings": []
   },
   "nas_tested": false,
-  "manifest_sha256": "83833fac9f451759f6b5423f75b27897c961fc17b3367967b59a9195ae50c163",
+  "embedded_compose_sdk": "0.30.2",
+  "manifest_sha256": "d049597154f1dc4218e83ee5b5b006fe2898f819d2227227e69beb46f02587b4",
   "lock_sha256": {
-    "package-lock.json": "1313f2e1cb5dc21072fcd02647a2cddfef92670134b052ae385bfd48cbe53220"
+    "package-lock.json": "67a1de25cf02a0c9fdc5a5d6dfa72a1c35f018659ff0defd339eb5e7c70bc3b0"
   },
   "outputs": [
     {
-      "file": "SynoPkgAudiobookshelf-2.37.1-0005-x86_64.spk",
-      "sha256": "312519d786af72b9283389a262642da46282ad1ce9d35c8ece65b308dfac4dea",
-      "size": 20062720,
-      "md5": "f7d0e466f6ad5e00690401e347a35ded"
+      "file": "SynoPkgAudiobookshelf-2.37.1-0007-x86_64.spk",
+      "sha256": "3f98d3587748dc74839a4a914f9988d8f165e574ed93276e0596d3352de43c71",
+      "size": 26684416,
+      "md5": "9edf55d9b252830a723019ab4d773068"
     }
   ],
   "go_binaries": [
     {
       "arch": "x86_64",
-      "path": "compose/storage-init",
+      "path": "compose/control",
       "version": "go1.26.10",
-      "sha256": "38cc4d48cd89a48c3f028e5143e0fd9e2635248e7e4a0aa9f457c49d4ea2adbd",
+      "sha256": "5bea4711d0564c97e8a669077112c122e1f9c7c27d109e8cb0feb67d81abd70a",
       "upstream_unmodified": false
     },
     {
       "arch": "x86_64",
-      "path": "compose/control",
+      "path": "compose/storage-init",
       "version": "go1.26.10",
-      "sha256": "5c53368c7783b6f45b89981ffb2e54778f149e0e3934e3558db6810a31d173b7",
+      "sha256": "a8611d079df326de4e8a9f7574d6d1c78f087afd49e37f899f811d7a0c5c570c",
       "upstream_unmodified": false
     },
     {
@@ -59,21 +60,28 @@
       "arch": "x86_64",
       "path": "daemon/payload/_sso/gateway",
       "version": "go1.26.10",
-      "sha256": "94a0e68937b78725a3ba620f8165bce1d3a8f7b39131248413f575accd218a80",
-      "upstream_unmodified": false
-    },
-    {
-      "arch": "x86_64",
-      "path": "ui/sso/open.cgi",
-      "version": "go1.26.10",
-      "sha256": "94a0e68937b78725a3ba620f8165bce1d3a8f7b39131248413f575accd218a80",
+      "sha256": "88cbe0ba1fa39699ea9fa0c49b7e5951bcc0dbf657c426ccc779247ca0d6d53d",
       "upstream_unmodified": false
     },
     {
       "arch": "x86_64",
       "path": "ui/sso/authorize.cgi",
       "version": "go1.26.10",
-      "sha256": "94a0e68937b78725a3ba620f8165bce1d3a8f7b39131248413f575accd218a80",
+      "sha256": "88cbe0ba1fa39699ea9fa0c49b7e5951bcc0dbf657c426ccc779247ca0d6d53d",
+      "upstream_unmodified": false
+    },
+    {
+      "arch": "x86_64",
+      "path": "ui/sso/open.cgi",
+      "version": "go1.26.10",
+      "sha256": "88cbe0ba1fa39699ea9fa0c49b7e5951bcc0dbf657c426ccc779247ca0d6d53d",
+      "upstream_unmodified": false
+    },
+    {
+      "arch": "x86_64",
+      "path": "ui/sso/settings.cgi",
+      "version": "go1.26.10",
+      "sha256": "88cbe0ba1fa39699ea9fa0c49b7e5951bcc0dbf657c426ccc779247ca0d6d53d",
       "upstream_unmodified": false
     }
   ]

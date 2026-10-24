@@ -1,18 +1,12 @@
 # Audiobookshelf for DSM
 
-## SDK 0.28.0 rebuild
+## 2.37.1-0007
 
-Rebuild 2.37.1-0005 with published SDK/App/CLI/templates 0.28.0 (executor/v0.27.0), UI 0.14.4 and Go 1.26.10, including the SDK's slow-NAS startup defaults. Maintainer: Syno Package Land. Official images and application sources are unchanged. Offline package checks only; no NAS testing was performed.
+Improve opening the App from the DSM menu and external access settings. Built with SDK/App 0.30.2 and CLI/templates 0.30.0. No NAS testing was performed for this toolchain rebuild.
 
-2.37.1-0005 使用已發佈 SDK/App/CLI/templates 0.28.0（executor/v0.27.0）、UI 0.14.4 與 Go 1.26.10 重建，並採用 SDK 的慢速 NAS 啟動預設值；維護者顯示為 Syno Package Land。 官方映像與上游程式維持原樣。 僅執行離線套件檢查，未進行 NAS 測試。
+改善從 DSM 選單開啟 App 與外網存取設定；使用 SDK/App 0.30.2 和 CLI/templates 0.30.0 重建
 
-## SDK 0.26.0 rebuild
-
-Rebuild 2.37.1-0004 with published SDK/App/CLI/templates 0.26.0, UI 0.14.4 and Go 1.26.10. Maintainer: Syno Package Land. Official images and application sources are unchanged. Check the selected shared folder permissions before starting; grant the package account the required access in DSM.
-
-2.37.1-0004 使用已發佈 SDK/App/CLI/templates 0.26.0、UI 0.14.4 與 Go 1.26.10 重建；維護者顯示為 Syno Package Land。 官方映像與上游程式維持原樣。 啟動前檢查所選共用資料夾權限；請在 DSM 授予套件帳號所需存取權限。
-
-DSM package for upstream **v2.37.1**, SPK **2.37.1-0001**, x86_64,
+DSM package for upstream **v2.37.1**, SPK **2.37.1-0007**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
 All package-owned files are under this directory.
 
@@ -54,7 +48,7 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use CLI/templates/SDK/App 0.28.0,
+Release pins in `toolchain.json` use CLI/templates/SDK/App 0.30.2,
 UI 0.14.4 and executor/v0.27.0. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and
