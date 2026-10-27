@@ -4,7 +4,11 @@ version: 2.37.1
 build: 9
 displayname: Audiobookshelf
 description: Organize and listen to your audiobooks and podcasts
-maintainer: Syno Package Land
+maintainer: advplyr
+metadata:
+  maintainer_url: https://github.com/advplyr/audiobookshelf
+  distributor: Syno Package Land
+  distributor_url: https://synopkgland.com/
 icon: assets/icon.png
 os_min_ver: "7.2.1-69057"
 arches: [x86_64]
