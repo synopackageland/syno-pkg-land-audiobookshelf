@@ -1,7 +1,7 @@
 schema: 2
 package: SynoPkgAudiobookshelf
 version: 2.37.1
-build: 10
+build: 11
 displayname: Audiobookshelf
 description: Organize and listen to your audiobooks and podcasts
 maintainer: advplyr
@@ -39,6 +39,7 @@ compose:
   web: {service: web, port: 13378, health: {path: /healthcheck, status: 200}}
   network: {egress: internet}
 identity_gateway:
+  upstream_auth_paths: [/audiobookshelf/api, /audiobookshelf/auth/refresh, /audiobookshelf/status, /audiobookshelf/socket.io, /audiobookshelf/hls, /audiobookshelf/public, /audiobookshelf/feed]
   sdk: 0.32.0
   mode: oidc
   access: dsm-admins
