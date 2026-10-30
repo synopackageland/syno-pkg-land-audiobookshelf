@@ -175,10 +175,10 @@ test('an unauthorized ordinary DSM user receives HTTP 403',
       const denied = reader.waitForResponse(response => new URL(response.url()).pathname === '/_sso/dsm-return' && response.status() === 403);
       await reader.goto(url.href, {waitUntil: 'domcontentloaded'});
       const response = await denied;
-      await reader.locator('[data-error-code=dsm_app_privilege_denied]').waitFor();
+      await reader.locator('[data-error-code=dsm_admin_required]').waitFor();
       await reader.screenshot({path: join(process.env.DSM_E2E_OUTPUT_DIR!, 'ordinary-user-denied.png')});
       expect(response.status()).toBe(403);
-      await writeFile(join(process.env.DSM_E2E_OUTPUT_DIR!, 'ordinary-denied.json'), JSON.stringify({httpStatus: response.status(), code: 'dsm_app_privilege_denied'}) + '\n', {mode: 0o600});
+      await writeFile(join(process.env.DSM_E2E_OUTPUT_DIR!, 'ordinary-denied.json'), JSON.stringify({httpStatus: response.status(), code: 'dsm_admin_required'}) + '\n', {mode: 0o600});
     } catch (error) {await capture(reader, 'ordinary-denial-failure'); throw error;}
     finally {await reader.close();}
   });

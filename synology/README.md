@@ -3,10 +3,9 @@
 ## Current candidate
 
 Candidate **2.37.2-0002** targets unchanged upstream **v2.37.2** with
-SDK/App **0.38.2**, CLI **0.41.6**, templates **0.35.5** and executor
+SDK/App **0.38.2**, CLI **0.41.8**, templates **0.35.5** and executor
 **v0.38.2**. The App renders the upstream UI and has no SDK UI-kit dependency.
-Build is blocked by CLI port-binding replanning; no candidate SPK or device
-acceptance exists yet. See [validation.md](docs/validation.md).
+Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
 ## Mobile and native clients
 
@@ -44,9 +43,8 @@ All package-owned files are under this directory.
 The SDK embedded OIDC provider signs the stable DSM subject. Native OpenID
 registration and automatic login are enabled; matching by email/name is disabled.
 DSM administrators receive individual upstream administrator accounts. Native
-password login is disabled. The candidate declares DSM Application Privileges
-for browser admission. Grant the App to each permitted ordinary DSM account; the gateway maps administrators to upstream
-administrators and ordinary accounts to upstream users.
+password login is disabled. Browser entry remains **administrator-only**;
+ordinary DSM users receive the SDK access-denied page.
 
 ## Media and private storage
 
@@ -83,7 +81,7 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use SDK/App 0.38.2, CLI 0.41.6,
+Release pins in `toolchain.json` use SDK/App 0.38.2, CLI 0.41.8,
 templates 0.35.5 and executor/v0.38.2. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and

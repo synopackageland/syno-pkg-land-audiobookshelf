@@ -1,7 +1,7 @@
 {
   "version": "2.37.2-0002",
   "toolchain": {
-    "cli": "0.41.6",
+    "cli": "0.41.8",
     "templates": "0.35.5",
     "sdk": "0.38.2",
     "app": "0.38.2",
@@ -10,33 +10,48 @@
     "goToolchain": "go1.26.10"
   },
   "checks": {
-    "version_tests": true,
-    "entry_contract": true,
-    "render_freshness": true,
-    "check": true,
-    "build": false,
-    "inspect": null
+    "build": true,
+    "inspect": true,
+    "public_content_scan": true,
+    "spk_content_scan": true,
+    "installation": true
   },
+  "validation_scope": "Build, inspect, content scans, native in-place upgrade and app-open A/N/X only; no full e2e or regression suites rerun.",
   "official_image": "docker.io/advplyr/audiobookshelf:2.37.2@sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
-  "artifacts": {},
+  "artifacts": {
+    "SynoPkgAudiobookshelf-2.37.2-0002-x86_64.spk": "cc2515cfb33d10aa3fac2984dbec4fbaafcd9150a2817c5119c729a1d237e704"
+  },
+  "inspect_findings": [],
   "publishable": false,
   "device_acceptance_complete": false,
   "release_smoke_complete": false,
   "smoke": {
-    "A": "not run",
-    "N": "not run",
-    "X": "not run"
+    "A": "failed: ERR_CERT_AUTHORITY_INVALID",
+    "N": "failed: ERR_CERT_AUTHORITY_INVALID before expected SDK denial",
+    "X": "passed: DSM sign-in gate"
+  },
+  "installation": {
+    "action": "upgrade",
+    "status": "running",
+    "dsm": "7.3.2-86009",
+    "share": "Audiobookshelf",
+    "permission": "ro",
+    "gateway_https": 30443,
+    "oidc_issuer": 13380,
+    "nonroot": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "no_new_privileges": true,
+    "read_only_rootfs": true
   },
   "blocker": {
-    "component": "@synopackageland/cli",
-    "version": "0.41.6",
-    "function": "lockComposeImages",
-    "missing_context": "installPorts",
-    "code": "COMPOSE_STORAGE_INIT_INVALID",
-    "message": "runtime port must reference install.ports"
+    "component": "@synopackageland/cli/e2e",
+    "version": "0.41.8",
+    "reason": "Signed-in A/N browser contexts reject the NAS gateway self-signed certificate after HTTP DSM entry redirects to HTTPS. Awaiting user-directed CLI 0.41.9 helper patch; no App workaround."
   },
   "lock_sha256": {
-    "package-lock.json": "b0033fe4f07b087e8494f0463c4185ab71ed43d6164273af7aa08ad0881530ac",
+    "package-lock.json": "f265859b18cdcfd386aee4f13688735d940e66a5746558fd6b2ad12219966b40",
     "tests/entry/go.sum": "0e611e1161da9bf75284dbe95c6905af945a8c9cd0800dd418f8eaead9b5862a"
   }
 }

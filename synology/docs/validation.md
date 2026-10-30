@@ -1,20 +1,29 @@
 # Validation scope
 
-## 2.37.2-0002 SDK 0.38.2 candidate (blocked)
+## 2.37.2-0002 SDK 0.38.2 candidate
 
-Pinned CLI 0.41.6, templates 0.35.5 and SDK/App 0.38.2, using published npm
-packages and checksummed Go modules. Version tests (5/5), Go entry contract,
-render freshness and check (no warnings) pass on the Linux builder.
+Pinned CLI 0.41.8, templates 0.35.5 and SDK/App 0.38.2, using published npm
+packages and checksummed Go modules. Every npm lockfile download URL uses the
+official registry. The earlier CLI image-locking port bug is fixed: Linux x86_64
+build and inspect pass with `findings=[]`. Integration files, commit text and
+the expanded SPK pass the private-denylist content scan. Artifact SHA-256 is
+recorded in `build-proof.json`.
 
-Build fails with `COMPOSE_STORAGE_INIT_INVALID: runtime port must reference
-install.ports`. The published CLI accepts the declarative OIDC issuer-port
-binding during check, then omits `installPorts` in `lockComposeImages` when
-replanning for build. The SDK correctly rejects the missing declaration.
-No SDK/CLI source overrides or fixed-port fallback were applied.
+Native in-place upgrade on DSM 7.3.2 passes and Package Center reports running.
+A retained legacy share without package-account access first refused startup;
+the native upgrade selection was then switched to the dedicated Audiobookshelf
+share. No ACL access to the old share was granted. The default HTTPS/issuer ports
+remain 30443/13380. The installed container runs as the nonzero package UID,
+drops ALL capabilities, uses no-new-privileges and has a read-only rootfs.
 
-There is no candidate SPK to inspect, install or smoke test. A/N/X device
-results are **not run**; this version is not accepted or publishable. Retained
-evidence below belongs to the explicitly named older versions.
+Only build, inspect, installation and app-open A/N/X were verified in this
+iteration. No full e2e or regression suite was rerun. Browser entry remains
+administrator-only. The final smoke result is A failed, N failed, X passed:
+A/N reach the HTTPS gateway from the HTTP DSM tunnel and reject its self-signed
+certificate (`ERR_CERT_AUTHORITY_INVALID`); X reaches the DSM sign-in gate.
+The user selected self-signed-certificate acceptance for e2e. A CLI helper patch
+is pending; no App test/helper or runtime security workaround was applied.
+The PR remains draft and device acceptance is incomplete.
 
 ## 2.37.1-0005 SDK 0.28.0 rebuild
 
