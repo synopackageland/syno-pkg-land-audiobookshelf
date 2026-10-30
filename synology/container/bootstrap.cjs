@@ -8,7 +8,8 @@ const {randomBytes} = require('node:crypto');
 const directory = '/var/tmp/audiobookshelf';
 const keyFile = path.join(directory, 'bootstrap-api-key');
 const base = 'http://127.0.0.1:13379';
-const issuer = 'http://127.0.0.1:13380';
+const issuerPort = Number(process.env.ABS_OIDC_PORT);
+const issuer = `http://127.0.0.1:${issuerPort}`;
 const budget = Number(process.env.SYNOPKGLAND_STARTUP_BUDGET_SECONDS);
 const deadline = performance.now() + budget * 1000;
 let child, stopping = false, phase = 'runtime-check';
@@ -69,7 +70,7 @@ for (const signal of ['SIGTERM', 'SIGINT']) process.on(signal, () => {
 });
 async function main() {
   remaining();
-  if (process.getuid() === 0 || !/^[a-f0-9]{64}$/.test(process.env.ABS_OIDC_SECRET || '') ||
+  if (!Number.isInteger(issuerPort) || issuerPort < 1024 || issuerPort > 65535 || process.getuid() === 0 || !/^[a-f0-9]{64}$/.test(process.env.ABS_OIDC_SECRET || '') ||
       !/^[a-f0-9]{64}$/.test(process.env.ABS_BOOTSTRAP_PASSWORD || '')) throw new Error('runtime-identity-or-secret');
   let token = readKey();
   const privateChild = launch(13379);

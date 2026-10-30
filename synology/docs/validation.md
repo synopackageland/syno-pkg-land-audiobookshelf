@@ -1,5 +1,30 @@
 # Validation scope
 
+## 2.37.2-0002 SDK 0.38.2 rebuild
+
+Pinned CLI 0.41.9, templates 0.35.5 and SDK/App 0.38.2, using published npm
+packages and checksummed Go modules. All 121 npm lockfile download URLs use the
+official registry. Linux x86_64 build and inspect pass with `findings=[]`.
+Integration files, commit text and the expanded SPK pass the private-denylist
+content scan. Artifact SHA-256 is recorded in `build-proof.json`.
+
+Native in-place upgrade on DSM 7.3.2 passes and Package Center reports running.
+The dedicated Audiobookshelf share stays read-only and the default gateway and
+issuer ports remain 30443/13380. The container's nonzero package UID, ALL dropped
+capabilities, no-new-privileges and read-only rootfs were read back during this
+candidate's installation. No upstream source or image bytes were changed.
+
+The final CLI 0.41.9 app-open smoke passes **A/N/X, 3/3, zero skips** over HTTPS:
+administrator entry renders the upstream Appbar account link, the real non-admin
+receives SDK access-denied without App content, and a fresh anonymous context
+reaches the DSM sign-in gate. The released shared helper accepts self-signed DSM
+and gateway certificates; no App-side TLS workaround was added.
+
+Only the requested build, inspect, install and A/N/X scope was rerun after the
+CLI fixes. No full e2e or regression suite was rerun. This minimal smoke does
+not establish broader media, account-revocation or reboot lifecycle acceptance.
+Earlier measurements below retain their explicitly named versions and scope.
+
 ## 2.37.1-0005 SDK 0.28.0 rebuild
 
 Rebuilt with published CLI/templates/SDK/App 0.28.0, executor/v0.27.0, UI 0.14.4

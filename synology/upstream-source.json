@@ -3,6 +3,6 @@
   "commit": "edb1f7efc92ecacdef51aafb4d9d5054ce10604f",
   "source_tree": "666720e07a48f0d3ea1e84c318793af60b6dfd95",
   "checkout_commit": "96c549fd6ba0d912a6d66271fa1620e72e6bb8f9",
-  "build": 1,
+  "build": 2,
   "checkout_note": "The existing fork main follows upstream master beyond this release. Packaging does not change that upstream tree; the official image uses the exact release commit."
 }
