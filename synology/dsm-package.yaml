@@ -12,7 +12,7 @@ metadata:
 icon: assets/icon.png
 os_min_ver: "7.2.1-69057"
 arches: [x86_64]
-entry: app-privilege
+entry: admin-only
 capabilities: {composeMounts: true}
 install:
   ports: true
@@ -44,7 +44,7 @@ identity_gateway:
   upstream_auth_paths: [/audiobookshelf/api, /audiobookshelf/auth/refresh, /audiobookshelf/status, /audiobookshelf/socket.io, /audiobookshelf/hls, /audiobookshelf/public, /audiobookshelf/feed]
   sdk: 0.38.2
   mode: oidc
-  access: dsm-users
+  access: dsm-admins
   listen: {https: 30443}
   roles: {admin: admin, user: user}
   redirects: {/: /audiobookshelf/}

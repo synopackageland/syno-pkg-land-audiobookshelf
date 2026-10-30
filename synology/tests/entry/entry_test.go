@@ -51,7 +51,7 @@ func TestEntryContract(t *testing.T) {
 	if !reflect.DeepEqual(cfg.UpstreamAuthPaths, expected) {
 		t.Fatalf("upstream_auth_paths = %v; want exactly %v", cfg.UpstreamAuthPaths, expected)
 	}
-	if manifest.Entry != "app-privilege" || cfg.Mode != "oidc" || cfg.Access != "dsm-users" {
+	if manifest.Entry != "admin-only" || cfg.Mode != "oidc" || cfg.Access != "dsm-admins" {
 		t.Fatalf("entry/login policy changed: %s %s %s", manifest.Entry, cfg.Mode, cfg.Access)
 	}
 	if cfg.UpstreamAccess != "" || len(cfg.Passthrough) != 0 || len(cfg.OptionalPassthrough) != 0 {
