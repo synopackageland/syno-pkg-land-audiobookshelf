@@ -1,28 +1,28 @@
 {
-  "tag": "2.37.1",
-  "upstream_commit": "3563d49424d50170324de9236a24c591b6d965e9",
-  "source_tree": "57cad5894a8c6b3387c1e05330157b5eb84268b7",
-  "build": 3,
+  "tag": "2.37.2",
+  "upstream_commit": "edb1f7efc92ecacdef51aafb4d9d5054ce10604f",
+  "source_tree": "666720e07a48f0d3ea1e84c318793af60b6dfd95",
+  "build": 1,
   "repository": "advplyr/audiobookshelf",
-  "reference": "docker.io/advplyr/audiobookshelf:2.37.1@sha256:581d68b2a6fc7ebf58d81c878a9f387cbbc0d88ac9d37b298b9cee10168af85b",
-  "index_digest": "sha256:581d68b2a6fc7ebf58d81c878a9f387cbbc0d88ac9d37b298b9cee10168af85b",
+  "reference": "docker.io/advplyr/audiobookshelf:2.37.2@sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
+  "index_digest": "sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
   "index_media_type": "application/vnd.oci.image.index.v1+json",
   "platforms": [
     {
       "os": "linux",
       "architecture": "amd64",
-      "manifest_digest": "sha256:10f3490855630aa024ba618b90ba6f58f3d9d7063dd77e1d1e958fdc4ede7c70",
-      "config_digest": "sha256:da452ea368f8bc126ef998175f726f9be995954ccdd38fccb063e0e460b1912d",
-      "source_commit": "3563d49424d50170324de9236a24c591b6d965e9",
-      "version": "2.37.1"
+      "manifest_digest": "sha256:37c2057e150694970442579815c646fe6bdc01c95b9d1547c4c9068be8844ef3",
+      "config_digest": "sha256:428769644edafa69beffc66ea45e4e1458a0f2b52e77e914d46068ca4b9fe53b",
+      "source_commit": "edb1f7efc92ecacdef51aafb4d9d5054ce10604f",
+      "version": "2.37.2"
     },
     {
       "os": "linux",
       "architecture": "arm64",
-      "manifest_digest": "sha256:4a1029867755efae922b562be89d4a842e7325f486f506c47241eab60fa9b431",
-      "config_digest": "sha256:2225a3e2123938c2917c06ff17a56715eeca6e2c98a1738def7c8e11cef05271",
-      "source_commit": "3563d49424d50170324de9236a24c591b6d965e9",
-      "version": "2.37.1"
+      "manifest_digest": "sha256:8c7e6c54460a6db508b520ff70e7025a5c0285f6ecc1574b6ba484dedc989f83",
+      "config_digest": "sha256:a263c06f5bec022a62997214588704ac6db35b864ef74f0a410392f137528f76",
+      "source_commit": "edb1f7efc92ecacdef51aafb4d9d5054ce10604f",
+      "version": "2.37.2"
     }
   ],
   "distribution": "official upstream registry; DSM Container Manager downloads the image"
