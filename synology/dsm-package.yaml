@@ -1,7 +1,7 @@
 schema: 2
 package: SynoPkgAudiobookshelf
-version: 2.37.1
-build: 11
+version: 2.37.2
+build: 1
 displayname: Audiobookshelf
 description: Organize and listen to your audiobooks and podcasts
 maintainer: advplyr
