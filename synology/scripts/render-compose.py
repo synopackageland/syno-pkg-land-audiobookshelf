@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 adapter = (ROOT / 'container/bootstrap.cjs').read_text()
 command = "umask 077\ncat > /var/tmp/audiobookshelf/bootstrap.cjs <<'ABS_ADAPTER'\n" + adapter + "ABS_ADAPTER\nexec node /var/tmp/audiobookshelf/bootstrap.cjs\n"
 rendered = json.dumps({'services': {'web': {
-    'image': 'docker.io/advplyr/audiobookshelf:2.37.1',
+    'image': 'docker.io/advplyr/audiobookshelf:' + json.loads((ROOT / 'image-lock.json').read_text())['tag'],
     'entrypoint': ['/bin/sh', '-eu', '-c'], 'command': [command],
     'environment': {'HOST': '127.0.0.1', 'PORT': '13378',
                     'CONFIG_PATH': '/var/tmp/audiobookshelf/config',

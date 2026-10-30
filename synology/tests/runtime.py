@@ -61,11 +61,14 @@ try:
             file = secret_dir / name
             file.write_text(secrets.token_hex(32)); file.chmod(0o600); os.chown(file, uid, uid)
             mounts += ['-v', str(file) + ':/synopkgland/secrets/' + name + ':ro']
+        port_file = secret_dir / 'port-oidc_issuer.value'
+        port_file.write_text('13380'); port_file.chmod(0o600); os.chown(port_file, uid, uid)
+        mounts += ['-v', str(port_file) + ':/synopkgland/settings/port-oidc_issuer.value:ro']
         initialization = {'directories': [
             {'base': '/var/tmp', 'path': 'audiobookshelf'},
             {'base': '/var/tmp', 'path': 'audiobookshelf/config'},
             {'base': '/var/tmp', 'path': 'audiobookshelf/metadata'},
-        ], 'runtime': {'environment': {'ABS_OIDC_SECRET': {'oidc_client': 'audiobookshelf'},
+        ], 'runtime': {'environment': {'ABS_OIDC_PORT': {'port': 'oidc_issuer'}, 'ABS_OIDC_SECRET': {'oidc_client': 'audiobookshelf'},
                                     'ABS_BOOTSTRAP_PASSWORD': {'secret': 'bootstrap'}}}}
         compose = json.loads((ROOT / 'compose.yaml').read_text())['services']['web']
         args = ['run', '-d', '--name', containers[1], *common,

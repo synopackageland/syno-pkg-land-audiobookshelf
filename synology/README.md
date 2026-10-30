@@ -2,10 +2,10 @@
 
 ## Current package
 
-Version **2.37.1-0011** uses published SDK/App/templates **0.32.0**,
-CLI **0.34.0** and executor **v0.32.0**. Protected executors require
-administrator approval after upgrading. Device and mobile-client acceptance
-are separate from the offline package gates.
+Version **2.37.2-0002** packages unchanged upstream **v2.37.2** with
+SDK/App **0.38.2**, CLI **0.41.9**, templates **0.35.5** and executor
+**v0.38.2**. The App renders the upstream UI and has no SDK UI-kit dependency.
+Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
 ## Mobile and native clients
 
@@ -36,34 +36,37 @@ The browser root and `/audiobookshelf/` remain DSM-gated, as does
 existing packaging policy. Existing-token access is the intended boundary;
 mobile OIDC callback/onboarding and complete share HTML flows remain unverified.
 
-DSM package for upstream **v2.37.1**, SPK **2.37.1-0011**, x86_64,
+DSM package for upstream **v2.37.2**, SPK **2.37.2-0002**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
 All package-owned files are under this directory.
 
 The SDK embedded OIDC provider signs the stable DSM subject. Native OpenID
 registration and automatic login are enabled; matching by email/name is disabled.
 DSM administrators receive individual upstream administrator accounts. Native
-password login is disabled. The candidate is **administrator-only**: the Compose
-route does not yet enforce per-App DSM Application Privileges for ordinary users.
+password login is disabled. Browser entry remains **administrator-only**;
+ordinary DSM users receive the SDK access-denied page.
 
 ## Media and private storage
 
-Select one existing Shared Folder in the native install wizard, or deploy with
-`--param media=Media`. It is mounted **read-only at `/media`**. For example, create
-an upstream library using `/media/audiobooks`. Podcasts may be read from this
-folder, but downloading podcasts into the read-only mount is unsupported.
+The native install wizard defaults to the dedicated **Audiobookshelf** Shared
+Folder. DSM creates it and grants **SynoPkgAudiobookshelf** read access. It is
+mounted **read-only at `/media`**. Create an upstream library using, for example,
+`/media/audiobooks`. Downloading podcasts into this read-only mount is unsupported.
 
-Selection does not grant access. In **Control Panel > Shared Folder > Edit >
-Permissions > System internal user**, grant **SynoPkgAudiobookshelf** read access
-and ensure child folders inherit it. The package container uses that fixed
-account, not the signed-in user's filesystem ACL. Audiobookshelf library/user
+An existing share may be selected instead; the wizard validates its folder type
+and the fixed package account's access before continuing. The container uses
+that account, not the signed-in user's filesystem ACL. Upstream library/user
 settings control which App users see its mounted data.
 
-Upgrade keeps the chosen name. To change it, pass both `--param CHANGE_media=true`
-and `--param media=OtherMedia`, or use the native upgrade wizard. A moved share
-needs another upgrade to resolve its new volume. To end existing streams, stop
-the package before revoking ACL access: already-open files cannot be recalled.
-Uninstall leaves the selected Shared Folder and its administrator-managed ACL.
+Upgrade keeps the saved share. To change it, use the native upgrade wizard, or
+pass `--param CHANGE_media=true --param media=OtherMedia`. A moved share needs
+another upgrade to resolve its new volume. To end existing streams, stop the
+App before revoking access. Uninstall retains the Shared Folder and source data.
+
+The native install wizard offers the default gateway HTTPS port **30443** and
+local OIDC issuer port **13380**. SDK validation checks availability and saves
+the selection; the startup adapter reads the selected issuer port from SDK
+runtime delivery. Upgrade retains the saved ports.
 
 Configuration, metadata and a private bootstrap API key live in the namespaced
 `data` volume under `/var/tmp/audiobookshelf`. SDK `storage_init` creates private
@@ -78,8 +81,8 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use SDK/App/templates 0.32.0 and CLI 0.34.0,
-UI 0.14.4 and executor/v0.32.0. Builds use the published packages and SDK modules.
+Release pins in `toolchain.json` use SDK/App 0.38.2, CLI 0.41.9,
+templates 0.35.5 and executor/v0.38.2. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and
 `SPL_RESOURCE_PREFIX`, then run `python3 scripts/build-linux.py`. It installs the
