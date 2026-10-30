@@ -11,11 +11,11 @@ cap_drop ALL, no-new-privileges, read-only rootfs and loopback listeners are req
 Use SDK storage_init for private storage and secret delivery. Configure upstream
 through supported APIs; never edit its database or add another identity service.
 
-Use install.sharedFolder mode select with matching compose.shares select install.
-Default media access is read-only; selection does not grant package-user ACLs.
-Guide the administrator to grant the fixed package identity permission in DSM.
-Do not expose all DSM users: Compose lacks the required Application Privileges
-check. The first candidate is administrator-only. Do not claim account deletion
+Use install.sharedFolder mode dedicated with matching compose.shares select install.
+Default media access is read-only; DSM creates the app-named share and grants
+the package identity RO access. Existing shares need validated package-user ACLs.
+Use entry app-privilege and gateway dsm-users; grant the normal test account only
+this App permission before smoke. Do not claim account deletion
 or immediate session revocation until the native bridge is implemented and tested.
 
 Run the affected tests on an authorized Linux build host, then check/build/inspect.
