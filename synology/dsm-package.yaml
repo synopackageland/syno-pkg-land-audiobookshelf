@@ -1,7 +1,7 @@
 schema: 2
 package: SynoPkgAudiobookshelf
 version: 2.37.2
-build: 1
+build: 2
 displayname: Audiobookshelf
 description: Organize and listen to your audiobooks and podcasts
 maintainer: advplyr
@@ -12,12 +12,13 @@ metadata:
 icon: assets/icon.png
 os_min_ver: "7.2.1-69057"
 arches: [x86_64]
-entry: admin-only
+entry: app-privilege
 capabilities: {composeMounts: true}
 install:
-  sharedFolder: {mode: select, key: media, permission: ro}
+  ports: true
+  sharedFolder: {mode: dedicated, key: media, name: Audiobookshelf, permission: ro}
 compose:
-  sdk: 0.32.0
+  sdk: 0.38.2
   shares:
     media:
       select: install
@@ -34,15 +35,16 @@ compose:
           - {base: /var/tmp, path: audiobookshelf/metadata}
         runtime:
           environment:
+            ABS_OIDC_PORT: {port: oidc_issuer}
             ABS_OIDC_SECRET: {oidc_client: audiobookshelf}
             ABS_BOOTSTRAP_PASSWORD: {secret: bootstrap}
   web: {service: web, port: 13378, health: {path: /healthcheck, status: 200}}
   network: {egress: internet}
 identity_gateway:
   upstream_auth_paths: [/audiobookshelf/api, /audiobookshelf/auth/refresh, /audiobookshelf/status, /audiobookshelf/socket.io, /audiobookshelf/hls, /audiobookshelf/public, /audiobookshelf/feed]
-  sdk: 0.32.0
+  sdk: 0.38.2
   mode: oidc
-  access: dsm-admins
+  access: dsm-users
   listen: {https: 30443}
   roles: {admin: admin, user: user}
   redirects: {/: /audiobookshelf/}

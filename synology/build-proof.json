@@ -1,25 +1,42 @@
 {
+  "version": "2.37.2-0002",
   "toolchain": {
-    "cli": "0.20.0",
-    "templates": "0.20.0",
-    "sdk": "0.20.0",
-    "app": "0.20.0",
-    "ui": "0.12.5",
-    "executorTag": "executor/v0.20.0",
-    "goToolchain": "go1.26.9"
+    "cli": "0.41.6",
+    "templates": "0.35.5",
+    "sdk": "0.38.2",
+    "app": "0.38.2",
+    "ui": null,
+    "executorTag": "executor/v0.38.2",
+    "goToolchain": "go1.26.10"
   },
   "checks": {
+    "version_tests": true,
+    "entry_contract": true,
+    "render_freshness": true,
     "check": true,
-    "build": true,
-    "inspect": true
+    "build": false,
+    "inspect": null
   },
-  "official_image": "docker.io/advplyr/audiobookshelf:2.37.1@sha256:581d68b2a6fc7ebf58d81c878a9f387cbbc0d88ac9d37b298b9cee10168af85b",
-  "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.1-0001-x86_64.spk": "313b60af84a39a9694b9b34421eb7501d778265a617d299ae71b26e0614ee632"
-  },
-  "publishable": true,
-  "shared_folder_activation_supported": true,
+  "official_image": "docker.io/advplyr/audiobookshelf:2.37.2@sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
+  "artifacts": {},
+  "publishable": false,
   "device_acceptance_complete": false,
-  "release_smoke_complete": true,
-  "acceptance_scope": "Dependency refresh: fresh install, main-menu sign-in, synthetic media playback, native stop/start, uninstall and fixture cleanup. Earlier bounded evidence is retained."
+  "release_smoke_complete": false,
+  "smoke": {
+    "A": "not run",
+    "N": "not run",
+    "X": "not run"
+  },
+  "blocker": {
+    "component": "@synopackageland/cli",
+    "version": "0.41.6",
+    "function": "lockComposeImages",
+    "missing_context": "installPorts",
+    "code": "COMPOSE_STORAGE_INIT_INVALID",
+    "message": "runtime port must reference install.ports"
+  },
+  "lock_sha256": {
+    "package-lock.json": "b0033fe4f07b087e8494f0463c4185ab71ed43d6164273af7aa08ad0881530ac",
+    "tests/entry/go.sum": "0e611e1161da9bf75284dbe95c6905af945a8c9cd0800dd418f8eaead9b5862a"
+  }
 }

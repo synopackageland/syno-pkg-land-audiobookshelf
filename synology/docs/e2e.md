@@ -1,4 +1,25 @@
-# Device acceptance
+# Minimal app-open smoke
+
+Run `npm run e2e:smoke` from `synology/` against an authorized NAS through the
+operator-owned tunnel. The CLI's `appOpenSmoke` opens the manifest entry for A
+(administrator), N (a permitted normal account), and X (a fresh signed-out
+context). The ready marker is the upstream Appbar account link, rendered after
+native authentication. All three cases must pass; a missing N account is a skip,
+not acceptance.
+
+Set `DSM_E2E_URL`, `DSM_E2E_TARGET`, `DSM_E2E_ACCOUNT_ADMIN`,
+`DSM_E2E_ACCOUNT_NORMAL`, `DSM_E2E_PROFILE_DIR`, and `DSM_E2E_OUTPUT_DIR`.
+Account JSON files must be mode 600 and outside `synology/`; profiles stay
+private. Use an output directory under ignored `synology/.e2e/` and archive
+privately after the run. Grant the normal account this App in DSM Application
+Privileges first. Forward the DSM HTTPS and selected gateway ports unchanged
+for browser callback routing. No router forwarding is required.
+
+The existing extended suite remains available through `npm run e2e:nas`.
+Its `ordinary` profile is a separate **unpermitted** account for the denial
+regression, distinct from the smoke's permitted `normal` profile.
+
+# Extended device acceptance
 
 Run upstream `e2e` 0.19.0 / `@e2e-dev/web` 0.14.0 in an authorized Linux browser
 container. The suite uses the released CLI's shared DSM login/profile helpers,
@@ -20,7 +41,7 @@ forwarded. Preserve that transport scope in any acceptance statement.
 The administrator cases click the real DSM main-menu item, wait for the native
 upstream OIDC user, check an administrator with an OpenID link and no password
 prompt, reopen it and exercise native logout. The ordinary-user case checks a
-real signed-in DSM account's denial. These are independent of Linux image probes.
+real signed-in DSM account without App permission is denied. These are independent of Linux image probes.
 
 For the authorized disposable media fixture, create a uniquely named DSM Shared
 Folder containing `audiobooks/Proof Author/Proof Book/{01,02}.mp3` synthetic audio.

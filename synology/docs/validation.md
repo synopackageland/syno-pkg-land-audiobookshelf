@@ -1,5 +1,21 @@
 # Validation scope
 
+## 2.37.2-0002 SDK 0.38.2 candidate (blocked)
+
+Pinned CLI 0.41.6, templates 0.35.5 and SDK/App 0.38.2, using published npm
+packages and checksummed Go modules. Version tests (5/5), Go entry contract,
+render freshness and check (no warnings) pass on the Linux builder.
+
+Build fails with `COMPOSE_STORAGE_INIT_INVALID: runtime port must reference
+install.ports`. The published CLI accepts the declarative OIDC issuer-port
+binding during check, then omits `installPorts` in `lockComposeImages` when
+replanning for build. The SDK correctly rejects the missing declaration.
+No SDK/CLI source overrides or fixed-port fallback were applied.
+
+There is no candidate SPK to inspect, install or smoke test. A/N/X device
+results are **not run**; this version is not accepted or publishable. Retained
+evidence below belongs to the explicitly named older versions.
+
 ## 2.37.1-0005 SDK 0.28.0 rebuild
 
 Rebuilt with published CLI/templates/SDK/App 0.28.0, executor/v0.27.0, UI 0.14.4
