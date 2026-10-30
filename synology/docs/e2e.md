@@ -4,8 +4,8 @@ Run `npm run e2e:smoke` from `synology/` against an authorized NAS through the
 operator-owned tunnel. The CLI's `appOpenSmoke` opens the manifest entry for A
 (administrator), N (a real non-admin account receiving the SDK access-denied
 page), and X (a fresh signed-out context). The ready marker is the upstream
-Appbar account link, rendered after native authentication. All three cases must pass; a missing N account is a skip,
-not acceptance.
+Appbar account link, rendered after native authentication. All three cases must
+pass; a missing N account is a skip, not acceptance.
 
 Set `DSM_E2E_URL`, `DSM_E2E_TARGET`, `DSM_E2E_ACCOUNT_ADMIN`,
 `DSM_E2E_ACCOUNT_NORMAL`, `DSM_E2E_PROFILE_DIR`, and `DSM_E2E_OUTPUT_DIR`.
@@ -13,13 +13,12 @@ Account JSON files must be mode 600 and outside `synology/`; profiles stay
 private. Use an output directory under ignored `synology/.e2e/` and archive
 privately after the run. The App remains administrator-only; do not grant the
 normal account administrator privileges or widen the entry for smoke.
-If the browser does not trust the DSM certificate, open an
-operator-owned SSH tunnel from the Linux test host: a free loopback port to the
-NAS's port 5000. Set `DSM_E2E_URL=http://127.0.0.1:<port>/` and close that tunnel
-after the run. Keep the smoke test and CLI helper unchanged. Forward the selected
-gateway and native DSM callback ports as needed for browser routing. No router
-forwarding is required. A/N certificate handling belongs to the released CLI
-helper; never add App-side TLS bypasses to make smoke pass.
+The CLI's DSM target accepts self-signed DSM and gateway certificates before
+navigation. Use the reachable DSM HTTPS URL in `DSM_E2E_URL`; no HTTP-only
+certificate workaround or App-side TLS override is needed. When network access
+requires an operator-owned SSH tunnel, forward the selected gateway and native
+DSM callback ports as well and close the tunnel after the run. No router port
+forwarding is required.
 
 The existing extended suite remains available through `npm run e2e:nas`.
 Its `ordinary` profile tests the same administrator-only denial boundary as

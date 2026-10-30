@@ -1,29 +1,29 @@
 # Validation scope
 
-## 2.37.2-0002 SDK 0.38.2 candidate
+## 2.37.2-0002 SDK 0.38.2 rebuild
 
-Pinned CLI 0.41.8, templates 0.35.5 and SDK/App 0.38.2, using published npm
-packages and checksummed Go modules. Every npm lockfile download URL uses the
-official registry. The earlier CLI image-locking port bug is fixed: Linux x86_64
-build and inspect pass with `findings=[]`. Integration files, commit text and
-the expanded SPK pass the private-denylist content scan. Artifact SHA-256 is
-recorded in `build-proof.json`.
+Pinned CLI 0.41.9, templates 0.35.5 and SDK/App 0.38.2, using published npm
+packages and checksummed Go modules. All 121 npm lockfile download URLs use the
+official registry. Linux x86_64 build and inspect pass with `findings=[]`.
+Integration files, commit text and the expanded SPK pass the private-denylist
+content scan. Artifact SHA-256 is recorded in `build-proof.json`.
 
 Native in-place upgrade on DSM 7.3.2 passes and Package Center reports running.
-A retained legacy share without package-account access first refused startup;
-the native upgrade selection was then switched to the dedicated Audiobookshelf
-share. No ACL access to the old share was granted. The default HTTPS/issuer ports
-remain 30443/13380. The installed container runs as the nonzero package UID,
-drops ALL capabilities, uses no-new-privileges and has a read-only rootfs.
+The dedicated Audiobookshelf share stays read-only and the default gateway and
+issuer ports remain 30443/13380. The container's nonzero package UID, ALL dropped
+capabilities, no-new-privileges and read-only rootfs were read back during this
+candidate's installation. No upstream source or image bytes were changed.
 
-Only build, inspect, installation and app-open A/N/X were verified in this
-iteration. No full e2e or regression suite was rerun. Browser entry remains
-administrator-only. The final smoke result is A failed, N failed, X passed:
-A/N reach the HTTPS gateway from the HTTP DSM tunnel and reject its self-signed
-certificate (`ERR_CERT_AUTHORITY_INVALID`); X reaches the DSM sign-in gate.
-The user selected self-signed-certificate acceptance for e2e. A CLI helper patch
-is pending; no App test/helper or runtime security workaround was applied.
-The PR remains draft and device acceptance is incomplete.
+The final CLI 0.41.9 app-open smoke passes **A/N/X, 3/3, zero skips** over HTTPS:
+administrator entry renders the upstream Appbar account link, the real non-admin
+receives SDK access-denied without App content, and a fresh anonymous context
+reaches the DSM sign-in gate. The released shared helper accepts self-signed DSM
+and gateway certificates; no App-side TLS workaround was added.
+
+Only the requested build, inspect, install and A/N/X scope was rerun after the
+CLI fixes. No full e2e or regression suite was rerun. This minimal smoke does
+not establish broader media, account-revocation or reboot lifecycle acceptance.
+Earlier measurements below retain their explicitly named versions and scope.
 
 ## 2.37.1-0005 SDK 0.28.0 rebuild
 

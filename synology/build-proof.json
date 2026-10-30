@@ -1,7 +1,7 @@
 {
   "version": "2.37.2-0002",
   "toolchain": {
-    "cli": "0.41.8",
+    "cli": "0.41.9",
     "templates": "0.35.5",
     "sdk": "0.38.2",
     "app": "0.38.2",
@@ -16,19 +16,19 @@
     "spk_content_scan": true,
     "installation": true
   },
-  "validation_scope": "Build, inspect, content scans, native in-place upgrade and app-open A/N/X only; no full e2e or regression suites rerun.",
+  "validation_scope": "CLI 0.41.9 rebuild, inspect, in-place upgrade and app-open A/N/X only; full e2e, regression and broader lifecycle acceptance were not rerun.",
   "official_image": "docker.io/advplyr/audiobookshelf:2.37.2@sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
   "artifacts": {
     "SynoPkgAudiobookshelf-2.37.2-0002-x86_64.spk": "cc2515cfb33d10aa3fac2984dbec4fbaafcd9150a2817c5119c729a1d237e704"
   },
   "inspect_findings": [],
-  "publishable": false,
+  "publishable": true,
   "device_acceptance_complete": false,
-  "release_smoke_complete": false,
+  "release_smoke_complete": true,
   "smoke": {
-    "A": "failed: ERR_CERT_AUTHORITY_INVALID",
-    "N": "failed: ERR_CERT_AUTHORITY_INVALID before expected SDK denial",
-    "X": "passed: DSM sign-in gate"
+    "A": "passed: authenticated upstream UI ready",
+    "N": "passed: non-admin SDK access-denied page, no App content",
+    "X": "passed: fresh anonymous DSM sign-in gate"
   },
   "installation": {
     "action": "upgrade",
@@ -45,13 +45,16 @@
     "no_new_privileges": true,
     "read_only_rootfs": true
   },
-  "blocker": {
-    "component": "@synopackageland/cli/e2e",
-    "version": "0.41.8",
-    "reason": "Signed-in A/N browser contexts reject the NAS gateway self-signed certificate after HTTP DSM entry redirects to HTTPS. Awaiting user-directed CLI 0.41.9 helper patch; no App workaround."
-  },
   "lock_sha256": {
-    "package-lock.json": "f265859b18cdcfd386aee4f13688735d940e66a5746558fd6b2ad12219966b40",
+    "package-lock.json": "9ca28c363d6506618ab82b0c37830108deb7c4a891df3243b63b5682cfc16070",
     "tests/entry/go.sum": "0e611e1161da9bf75284dbe95c6905af945a8c9cd0800dd418f8eaead9b5862a"
+  },
+  "requested_acceptance_complete": true,
+  "smoke_summary": {
+    "selected": 3,
+    "executed": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
   }
 }
