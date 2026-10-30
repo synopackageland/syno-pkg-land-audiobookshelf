@@ -12,8 +12,11 @@ Set `DSM_E2E_URL`, `DSM_E2E_TARGET`, `DSM_E2E_ACCOUNT_ADMIN`,
 Account JSON files must be mode 600 and outside `synology/`; profiles stay
 private. Use an output directory under ignored `synology/.e2e/` and archive
 privately after the run. Grant the normal account this App in DSM Application
-Privileges first. Forward the DSM HTTPS and selected gateway ports unchanged
-for browser callback routing. No router forwarding is required.
+Privileges first. If the browser does not trust the DSM certificate, open an
+operator-owned SSH tunnel from the Linux test host: a free loopback port to the
+NAS's port 5000. Set `DSM_E2E_URL=http://127.0.0.1:<port>/` and close that tunnel
+after the run. Keep the smoke test and CLI helper unchanged. Forward the selected
+gateway port as needed for browser callback routing. No router forwarding is required.
 
 The existing extended suite remains available through `npm run e2e:nas`.
 Its `ordinary` profile is a separate **unpermitted** account for the denial
