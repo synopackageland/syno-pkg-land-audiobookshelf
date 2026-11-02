@@ -2,31 +2,33 @@
 
 ## Current package
 
-Version **2.37.2-0003** packages unchanged upstream **v2.37.2** with
-SDK/App **0.42.0**, CLI **0.42.2**, templates **0.37.0** and executor
+Version **2.37.2-0005** packages unchanged upstream **v2.37.2** with
+SDK/App **0.44.0**, CLI **0.44.0**, templates **0.38.1** and executor
 **v0.39.0**. The App renders the upstream UI and has no SDK UI-kit dependency.
 Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
 ## Mobile and native clients
 
-`identity_gateway.upstream_auth_paths` is exactly:
+`identity_gateway.ingress.path` is `/audiobookshelf/`. Gateway policy paths are
+relative to this base; `identity_gateway.upstream_auth_paths` is exactly:
 
 ```text
-/audiobookshelf/api
-/audiobookshelf/auth/refresh
-/audiobookshelf/status
-/audiobookshelf/socket.io
-/audiobookshelf/hls
-/audiobookshelf/public
-/audiobookshelf/feed
+/api
+/auth/refresh
+/status
+/socket.io
+/hls
+/public
+/feed
 ```
 
 These fixed prefixes are case-sensitive and match complete path segments.
 They bypass DSM admission and keep upstream authentication and authorization.
 All other paths, including browser entry, retain the existing DSM gate.
 
-Clients use the gateway HTTPS origin with the existing `/audiobookshelf`
-base path. The exceptions cover API calls, token refresh, status, Socket.IO,
+Clients use the DSM HTTPS origin with the `/audiobookshelf/` base path.
+The SDK scopes these declarations once; the upstream receives full paths such as
+`/audiobookshelf/api` and `/audiobookshelf/socket.io`. The exceptions cover API calls, token refresh, status, Socket.IO,
 HLS, public resources and RSS feeds. Audiobookshelf validates native tokens and
 permissions where required; its public resources and feed/share URLs retain
 their upstream public or secret-link behavior. Manage and revoke tokens and
@@ -36,7 +38,7 @@ The browser root and `/audiobookshelf/` remain DSM-gated, as does
 existing packaging policy. Existing-token access is the intended boundary;
 mobile OIDC callback/onboarding and complete share HTML flows remain unverified.
 
-DSM package for upstream **v2.37.2**, SPK **2.37.2-0003**, x86_64,
+DSM package for upstream **v2.37.2**, SPK **2.37.2-0005**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
 All package-owned files are under this directory.
 
@@ -63,10 +65,11 @@ pass `--param CHANGE_media=true --param media=OtherMedia`. A moved share needs
 another upgrade to resolve its new volume. To end existing streams, stop the
 App before revoking access. Uninstall retains the Shared Folder and source data.
 
-The native install wizard offers the default gateway HTTPS port **30443** and
-local OIDC issuer port **13380**. SDK validation checks availability and saves
-the selection; the startup adapter reads the selected issuer port from SDK
-runtime delivery. Upgrade retains the saved ports.
+The DSM HTTPS server owns the public `/audiobookshelf/` route. There is no
+dedicated public gateway listener or installer port field. The local OIDC issuer
+uses loopback port **13380**, matching `ABS_OIDC_PORT` in the container environment.
+Upgrades retain the saved media selection and private identity state; old saved
+port values are no longer used by this package.
 
 Configuration, metadata and a private bootstrap API key live in the namespaced
 `data` volume under `/var/tmp/audiobookshelf`. SDK `storage_init` creates private
@@ -81,8 +84,8 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use SDK/App 0.42.0, CLI 0.42.2,
-templates 0.37.0 and executor/v0.39.0. Builds use the published packages and SDK modules.
+Release pins in `toolchain.json` use SDK/App 0.44.0, CLI 0.44.0,
+templates 0.38.1 and executor/v0.39.0. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and
 `SPL_RESOURCE_PREFIX`, then run `python3 scripts/build-linux.py`. It installs the
@@ -108,7 +111,8 @@ API tokens and progress are not certified as immediately revoked on DSM logout,
 disable or deletion. Native/mobile clients are not certified. See
 [framework-gaps.md](docs/framework-gaps.md).
 
-The native frontend is compiled at `/audiobookshelf/`. Root redirects there;
+The native frontend is compiled at `/audiobookshelf/`. DSM redirects the bare
+`/audiobookshelf` path to its trailing-slash form;
 OIDC callbacks use `/audiobookshelf/auth/openid/callback`. Native auto-launch owns
 the browser redirect and token handling; no second login page is added.
 

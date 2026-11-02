@@ -18,7 +18,7 @@ import (
 	gateway "github.com/synopackageland/syno-pkg-land-sdk/idgateway"
 )
 
-var expected = []string{"/audiobookshelf/api", "/audiobookshelf/auth/refresh", "/audiobookshelf/status", "/audiobookshelf/socket.io", "/audiobookshelf/hls", "/audiobookshelf/public", "/audiobookshelf/feed"}
+var expected = []string{"/api", "/auth/refresh", "/status", "/socket.io", "/hls", "/public", "/feed"}
 
 type fixtureDirectory struct{}
 
@@ -40,14 +40,27 @@ func TestEntryContract(t *testing.T) {
 		t.Fatalf("read manifest with locked npm dependencies: %v", err)
 	}
 	var manifest struct {
-		Package string         `json:"package"`
-		Entry   string         `json:"entry"`
-		Gateway gateway.Config `json:"identity_gateway"`
+		Package string                     `json:"package"`
+		Entry   string                     `json:"entry"`
+		Install map[string]json.RawMessage `json:"install"`
+		Gateway struct {
+			gateway.Config
+			Ingress struct {
+				Path string `json:"path"`
+			} `json:"ingress"`
+		} `json:"identity_gateway"`
 	}
 	if err := json.Unmarshal(raw, &manifest); err != nil {
 		t.Fatal(err)
 	}
-	cfg := manifest.Gateway
+	cfg := manifest.Gateway.Config
+	const base = "/audiobookshelf/"
+	if manifest.Gateway.Ingress.Path != base || cfg.Listen.HTTP != 0 || cfg.Listen.HTTPS != 0 || manifest.Install["ports"] != nil {
+		t.Fatal("DSM path ingress must replace public gateway listeners and installer ports")
+	}
+	if len(cfg.OIDC.Clients) != 1 || !reflect.DeepEqual(cfg.OIDC.Clients[0].RedirectPaths, []string{"/auth/openid/callback"}) {
+		t.Fatal("OIDC callback must be relative to the ingress base")
+	}
 	if !reflect.DeepEqual(cfg.UpstreamAuthPaths, expected) {
 		t.Fatalf("upstream_auth_paths = %v; want exactly %v", cfg.UpstreamAuthPaths, expected)
 	}
@@ -63,13 +76,16 @@ func TestEntryContract(t *testing.T) {
 			t.Fatal(err)
 		}
 		if !reflect.DeepEqual(policy.UpstreamAuthPaths, expected) ||
-			policy.Entry != manifest.Entry || policy.Mode != cfg.Mode || policy.Access != cfg.Access {
+			policy.Entry != manifest.Entry || policy.Mode != cfg.Mode || policy.Access != cfg.Access || policy.IngressPath != base {
 			t.Fatal("packaged policy differs from the manifest contract")
 		}
 	}
 	var hits atomic.Int64
 	upstream := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		hits.Add(1)
+		if !strings.HasPrefix(r.URL.Path, base) || strings.Contains(r.URL.Path, "/audiobookshelf/audiobookshelf/") {
+			t.Error("upstream did not receive the original single-base path")
+		}
 		if r.Header.Get("Authorization") != "Bearer fixture" || r.Header.Get("Cookie") != "native=fixture" {
 			t.Error("upstream credentials were changed")
 		}
@@ -80,7 +96,7 @@ func TestEntryContract(t *testing.T) {
 	}))
 	defer upstream.Close()
 	frontConfig := gateway.FrontConfig{
-		Package: manifest.Package, Entry: manifest.Entry, Mode: cfg.Mode, Access: cfg.Access,
+		IngressPath: base, Package: manifest.Package, Entry: manifest.Entry, Mode: cfg.Mode, Access: cfg.Access,
 		UpstreamAuthPaths: cfg.UpstreamAuthPaths, Upstream: upstream.URL,
 		Key:      bytes.Repeat([]byte{42}, 32),
 		Accounts: fixtureDirectory{}, Membership: fixtureDirectory{},
@@ -105,7 +121,7 @@ func TestEntryContract(t *testing.T) {
 	}
 	request := func(method, path string, browser bool) *httptest.ResponseRecorder {
 		t.Helper()
-		r := httptest.NewRequest(method, "https://app.example"+path, nil)
+		r := httptest.NewRequest(method, "https://app.example"+strings.TrimSuffix(base, "/")+path, nil)
 		r.RemoteAddr = "203.0.113.7:4444"
 		r.Header.Set("Accept", "application/json")
 		r.Header.Set("Authorization", "Bearer fixture")
@@ -129,7 +145,7 @@ func TestEntryContract(t *testing.T) {
 			}
 		}
 	}
-	protected := []string{"/", "/audiobookshelf/", "/audiobookshelf/auth/openid/callback"}
+	protected := []string{"/", "/auth/openid/callback", "/_nuxt/app.js"}
 	for _, prefix := range expected {
 		protected = append(protected, prefix+"-outside")
 		for i, c := range prefix {
@@ -148,6 +164,14 @@ func TestEntryContract(t *testing.T) {
 		}
 		if hits.Load() != before {
 			t.Fatalf("reserved %s reached upstream", path)
+		}
+	}
+	for _, path := range []string{"/api", "/audiobookshelf-other/api", "/synopkgland/OtherApp/api"} {
+		before := hits.Load()
+		w := httptest.NewRecorder()
+		front.ServeHTTP(w, httptest.NewRequest("GET", "https://app.example"+path, nil))
+		if w.Code != http.StatusNotFound || hits.Load() != before {
+			t.Fatalf("outside namespace %s reached upstream: %d", path, w.Code)
 		}
 	}
 	for _, path := range protected {
