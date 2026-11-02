@@ -1,14 +1,15 @@
 {
-  "version": "2.37.2-0003",
+  "version": "2.37.2-0007",
   "toolchain": {
-    "cli": "0.42.2",
-    "templates": "0.37.0",
-    "sdk": "0.42.0",
-    "app": "0.42.0",
+    "cli": "0.47.1",
+    "templates": "0.38.1",
+    "sdk": "0.44.1",
+    "app": "0.44.1",
     "ui": null,
     "executorTag": "executor/v0.39.0",
     "goToolchain": "go1.26.10"
   },
+  "sdk_release_commit": "2f2a1d30c147b401267a3daff42eb9a3a01d8ba1",
   "checks": {
     "check": true,
     "build": true,
@@ -16,10 +17,25 @@
   },
   "official_image": "docker.io/advplyr/audiobookshelf:2.37.2@sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
   "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.2-0003-x86_64.spk": "0dd39be1d4782e2bbb572f9be929f57c27df1ec4ae3262a7e1c0bb83c36e4da5"
+    "SynoPkgAudiobookshelf-2.37.2-0007-x86_64.spk": "c51cb032692edf03b6456b0e61f79441b63cd89db60b15c327f79076985fe54c"
   },
+  "artifact_bytes": 37557760,
   "inspect_findings": [],
-  "validation_scope": "Existing version and entry-policy tests, render freshness, check/build/inspect for the only declared architecture x86_64, one in-place upgrade, stable-setting comparison and administrator DSM launcher CGI open only. No full gate or full e2e run.",
+  "validation_scope": "CLI 0.47.1 rebuild with SDK/App 0.44.1 unchanged: 5 version tests, render freshness, check/build/inspect, generated data-share/wizard review, scoped source and expanded-SPK privacy scans, and one actual Package Center WebAPI upgrade from 0006 to 0007. Stable libraries/users/progress/auth settings/private hashes are preserved. Earlier browser and SDK entry-contract evidence retains its original version scope; no full lifecycle or fresh wizard UI acceptance is claimed.",
+  "local_tests": {
+    "version": {
+      "passed": 5,
+      "reused_unchanged_test_source": false
+    },
+    "entry_contract": {
+      "passed": 1,
+      "sdk": "0.44.1",
+      "execution": "go test -exec go-nonroot-exec",
+      "reused_unchanged_sdk_and_test_source": true,
+      "validated_for_version": "2.37.2-0006"
+    },
+    "packaged_policy": "validated by CLI 0.47.1 inspect"
+  },
   "public_content_scan": true,
   "spk_content_scan": true,
   "registry_urls": {
@@ -28,36 +44,105 @@
   },
   "installation": {
     "action": "upgrade",
-    "from": "2.37.2-0002",
-    "version": "2.37.2-0003",
+    "from": "2.37.2-0006",
+    "version": "2.37.2-0007",
     "status": "running",
-    "stable_settings_preserved": true,
-    "libraries_preserved": true,
-    "users_preserved": true,
-    "oidc_settings_preserved": true,
-    "bootstrap_key_preserved": true,
-    "nonroot": true,
-    "cap_drop": [
-      "ALL"
+    "transport": "Package Center WebAPI",
+    "webapi_upgrade_accepted": true,
+    "error_4541": false,
+    "hooks": [
+      {
+        "phase": "preupgrade",
+        "exit": 0
+      },
+      {
+        "phase": "preinst",
+        "exit": 0
+      },
+      {
+        "phase": "postinst",
+        "exit": 0
+      },
+      {
+        "phase": "postupgrade",
+        "exit": 0
+      },
+      {
+        "phase": "start-stop-status prestart",
+        "exit": 0
+      },
+      {
+        "phase": "start-stop-status start",
+        "exit": 0
+      }
     ],
-    "no_new_privileges": true,
-    "read_only_rootfs": true
+    "retention": {
+      "libraries": true,
+      "users": true,
+      "progress": true,
+      "authSettings": true,
+      "config.jsonHash": true,
+      "bootstrap-api-keyHash": true
+    },
+    "evidence_reused": false,
+    "upgrade_requests": 1,
+    "existing_folder_submitted": true,
+    "folder_changed": false,
+    "data_share_acquired": true,
+    "media_readable": true,
+    "no_uninstall_or_data_deletion": true
   },
   "browser": {
-    "administrator_desktop": true,
+    "administrator_desktop_menu": true,
     "menu_target": "/webman/3rdparty/SynoPkgAudiobookshelf/sso/open.cgi",
-    "launcher_cgi_app_ready": true,
-    "ready_marker": "#appbar a[href^=\"/audiobookshelf/account\"]",
-    "requested_ingress": "/synopkgland/SynoPkgAudiobookshelf/",
-    "requested_ingress_http_status": 404,
-    "dsm_menu_entry_dom_click": true
+    "same_origin_ingress": "/audiobookshelf/",
+    "app_ready": true,
+    "nuxt_javascript_assets": 23,
+    "nuxt_statuses": [
+      200,
+      304
+    ],
+    "failed_ingress_responses": 0,
+    "api_status": 200,
+    "socket_io": {
+      "path": "/audiobookshelf/socket.io/",
+      "transport": "websocket",
+      "connected": true,
+      "received_frames": true
+    },
+    "normal_user": {
+      "httpStatus": 403,
+      "code": "dsm_admin_required",
+      "appVisible": false,
+      "policy": "admin-only"
+    },
+    "signed_out": {
+      "dsm_login_visible": true,
+      "app_visible": false,
+      "unauthenticated_api_status": 401
+    },
+    "validated_for_version": "2.37.2-0005",
+    "validated_sdk": "0.44.0",
+    "repeated_for_rebuild": false,
+    "reuse_basis": "Identical application image, container configuration, ingress path, auth rules and path-prefix set; SDK patch only corrects explicit-command dispatch under CGI environment."
   },
   "lock_sha256": {
-    "package-lock.json": "e5ea3b06a2999b748f0f05f4f6e7d54766053b088cb05d7e6cec5a1573d63f45",
-    "tests/entry/go.sum": "15b062567eaa1548640cc72179851f672b24444103e28fd165af370a3176f20d"
+    "package-lock.json": "7586e8dc988ae4855d35959872a45a558518c2098382630a57d4d6a1bc1a8c72",
+    "tests/entry/go.sum": "ac77edb102c6bde09e3a9fa101334c50d25d1afbe0659bf1e95beb0ea364cdc8"
   },
-  "device_acceptance_complete": false,
+  "device_acceptance_complete": true,
+  "requested_acceptance_complete": true,
+  "scoped_browser_checks_complete": true,
   "release_smoke_complete": false,
-  "requested_acceptance_complete": false,
-  "remaining": "The requested same-origin ingress is absent; the existing Compose gateway launch succeeds. Coordinator review is required before treating that path requirement as satisfied."
+  "remaining": [],
+  "shared_folder": {
+    "mechanism": "DSM data-share",
+    "selection_variable": "media",
+    "permission": "ro",
+    "package_account": "SynoPkgAudiobookshelf",
+    "generated_upgrade_wizard_checked": true,
+    "interactive_wizard_rerun": false,
+    "fresh_share_without_prior_acl_tested": false,
+    "retained_selection_render_test": true
+  }
 }

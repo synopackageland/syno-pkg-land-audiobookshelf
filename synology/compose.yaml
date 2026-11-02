@@ -16,6 +16,7 @@
         "CONFIG_PATH": "/var/tmp/audiobookshelf/config",
         "METADATA_PATH": "/var/tmp/audiobookshelf/metadata",
         "ROUTER_BASE_PATH": "/audiobookshelf",
+        "ABS_OIDC_PORT": "13380",
         "TZ": "UTC"
       },
       "read_only": true,

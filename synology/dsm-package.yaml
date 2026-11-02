@@ -1,7 +1,7 @@
 schema: 2
 package: SynoPkgAudiobookshelf
 version: 2.37.2
-build: 3
+build: 7
 displayname: Audiobookshelf
 description: Organize and listen to your audiobooks and podcasts
 maintainer: advplyr
@@ -15,10 +15,9 @@ arches: [x86_64]
 entry: admin-only
 capabilities: {composeMounts: true}
 install:
-  ports: true
   sharedFolder: {mode: dedicated, key: media, name: Audiobookshelf, permission: ro}
 compose:
-  sdk: 0.42.0
+  sdk: 0.44.1
   shares:
     media:
       select: install
@@ -35,24 +34,22 @@ compose:
           - {base: /var/tmp, path: audiobookshelf/metadata}
         runtime:
           environment:
-            ABS_OIDC_PORT: {port: oidc_issuer}
             ABS_OIDC_SECRET: {oidc_client: audiobookshelf}
             ABS_BOOTSTRAP_PASSWORD: {secret: bootstrap}
   web: {service: web, port: 13378, health: {path: /healthcheck, status: 200}}
   network: {egress: internet}
 identity_gateway:
-  upstream_auth_paths: [/audiobookshelf/api, /audiobookshelf/auth/refresh, /audiobookshelf/status, /audiobookshelf/socket.io, /audiobookshelf/hls, /audiobookshelf/public, /audiobookshelf/feed]
-  sdk: 0.42.0
+  upstream_auth_paths: [/feed, /public, /hls, /socket.io, /status, /auth/refresh, /api]
+  sdk: 0.44.1
   mode: oidc
   access: dsm-admins
-  listen: {https: 30443}
+  ingress: {path: /audiobookshelf/}
   roles: {admin: admin, user: user}
-  redirects: {/: /audiobookshelf/}
   oidc:
     issuer_port: 13380
     clients:
       - id: audiobookshelf
-        redirect_paths: [/audiobookshelf/auth/openid/callback]
+        redirect_paths: [/auth/openid/callback]
         pkce: true
 ui: {launch: new-page}
 i18n:

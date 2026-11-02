@@ -1,5 +1,128 @@
 # Validation scope
 
+## 2.37.2-0007 CLI 0.47.1 shared-folder rebuild
+
+Pin published CLI **0.47.1**; SDK/App **0.44.1**, templates **0.38.1** and
+executor **v0.39.0** stay unchanged. The official image, administrator-only
+policy, same-origin ingress and read-only media selection are preserved.
+The generated resource now uses the selected `media` variable in DSM data-share
+with package-account RO permission. The generated upgrade wizard rendered an existing folder from a local retained
+configuration, without a separate change checkbox; supported-folder validation
+was inspected. No App ACL writer is added.
+
+The five version tests, render freshness, check/build/inspect (`findings=[]`),
+official registry lock URLs and scoped source/expanded-SPK scans passed.
+Artifact: **37,557,760 bytes**, SHA-256
+`c51cb032692edf03b6456b0e61f79441b63cd89db60b15c327f79076985fe54c`.
+
+Exactly **one Package Center WebAPI upgrade, 0006 to 0007**, completed and reached
+running, without error **4541**. It explicitly submitted the existing saved
+folder to the new installer; the selection did not change. The device log records
+zero exit codes for preupgrade, preinst, postinst, postupgrade, prestart and start,
+and successful DSM data-share acquisition. The installed resource retains the
+selected-folder RO grant, the running container reads `/media`, and the official
+image/nonroot/cap_drop ALL/no-new-privileges/read-only-rootfs settings remain.
+Library records, stable user IDs/roles, progress, OIDC settings, saved-folder
+configuration and bootstrap-key hashes compare equal before and after upgrade.
+
+The full browser/lifecycle matrix was not repeated. This run verifies retained
+folder upgrade and generated wizard/resource behavior; it does not claim a fresh
+interactive wizard run or a new-share grant with no prior ACL. Earlier browser
+and SDK entry-contract evidence below keeps its original version scope. No merge,
+tag, release or publication was performed.
+
+## 2.37.2-0006 SDK 0.44.1 installer fix
+
+Pin SDK/App **0.44.1** from published release commit
+`2f2a1d30c147b401267a3daff42eb9a3a01d8ba1`. CLI **0.44.0**, templates
+**0.38.1** and executor **v0.39.0** remain pinned. The gateway patch dispatches
+explicit installer commands before inspecting the inherited CGI environment.
+The application image, OIDC settings, path-prefix set and administrator-only
+admission stay unchanged. Prefix declarations use the same order as the verified
+upgrade artifact; the nonoverlapping path set and access behavior are unchanged.
+
+This rebuild passed the affected nonroot SDK entry-contract test, render
+freshness, CLI check/build/inspect (`findings=[]`) and scoped source/expanded-SPK
+privacy scans. The version-test source is unchanged; its previous 5/5 result
+is retained. The SDK release gate and previous App browser matrix were not rerun.
+
+The rebuilt SPK is **byte-for-byte identical** to the already tested published-SDK
+upgrade artifact: **37,557,760 bytes**, SHA-256
+`1e17a02c608c67319a393f32c03c90a0fba481ea3f67cc2f5523917159bd2232`.
+That artifact upgraded **0005 to 0006 through Package Center WebAPI**, using the
+published CLI installer, and reached running. The device log records zero exit
+codes for preupgrade, preinst, postinst, postupgrade, prestart and start, with
+**no 4541**. The incoming build-policy digest deliberately differed from 0005,
+covering the original failure condition. Library, stable users, progress,
+authentication settings and bootstrap-key hash comparisons all passed.
+
+The exact artifact match carries that existing WebAPI result to this rebuild;
+no duplicate upgrade, reinstall, downgrade or browser matrix was performed.
+Read-only package version/status confirms **0006 running**. No uninstall, user
+data deletion or DSM setting change was performed. Detailed artifact matching
+and bounded evidence are recorded in `build-proof.json`; private handoff logs
+remain outside Git.
+
+The prior administrator/ordinary-user/signed-out browser results below are
+retained with their original 0005 scope. **Administrator-only access is the
+required policy**; ordinary users receiving 403 is a passed authorization check.
+There is no pending request to widen access. The old CGI dispatch blocker is
+resolved for the WebAPI upgrade by SDK 0.44.1 and the verified 0006 artifact.
+Full lifecycle, media playback and release gates remain outside this task.
+
+## 2.37.2-0005 custom DSM path ingress
+
+Published CLI/SDK/App **0.44.0**, templates **0.38.1**, executor **v0.39.0**.
+The official upstream image is unchanged. All edits remain under `synology/`.
+`build-proof.json` records the exact SPK hash and bounded acceptance results.
+
+The affected version tests passed 5/5. The SDK gateway entry-contract test passed
+as a nonroot process against both the manifest and the expanded SPK policy.
+It exercises scoped API prefixes, preserved credentials, reserved/protected
+routes and rejection outside the selected ingress. Render freshness, CLI check,
+x86_64 build and inspect passed with no inspect findings. Scoped source and
+expanded-SPK scans passed with the private denylist.
+
+An existing **2.37.2-0004** installation upgraded in place to **0005** through
+native `synopkg install`, without uninstalling or deleting data. Exact library
+and progress records, stable user IDs/roles, OIDC settings, media selection and
+bootstrap-key hashes were retained. The official running image, nonzero UID/GID,
+cap_drop ALL, no-new-privileges and read-only rootfs were independently checked.
+The old public port **30443** has no IPv4 or IPv6 listener; upstream **13378**
+and issuer **13380** remain bound to IPv4 loopback.
+
+A fresh browser opened the real DSM main-menu item and reached the App on the
+same DSM HTTPS origin under `/audiobookshelf/`. **23 distinct Nuxt JavaScript
+assets** loaded with HTTP 200 or valid 304 cache responses, with no failing
+App responses. The authenticated libraries API returned 200. Socket.IO used
+`/audiobookshelf/socket.io/`, connected over WebSocket and received frames.
+An ordinary signed-in user received HTTP 403 / `dsm_admin_required`. A fresh
+signed-out visitor saw DSM login without App content; its unauthenticated
+libraries API request returned 401. Self-signed certificate tolerance was limited
+to the disposable browser. No certificate trust or DSM settings were changed.
+
+### Acceptance limits and installer defect
+
+The existing `admin-only` / `dsm-admins` rules are preserved. Ordinary-user
+denial is the required and verified outcome; no access expansion is requested.
+
+The first CLI WebAPI upgrade attempt failed in `preupgrade` with
+`gateway entry policy does not match package build policy`. DSM restored 0004
+and restarted it; library and progress comparisons passed after recovery.
+A read-only reproduction showed the published `ingress-check` succeeds normally,
+but with inherited `GATEWAY_INTERFACE=CGI/1.1` it enters CGI dispatch and loads
+the old installation policy. The same unmodified SPK then passed all native
+upgrade hooks through `synopkg install`. This historical 0005
+failure is resolved by the published SDK 0.44.1 and WebAPI-tested 0006 artifact
+described above. No App-side bypass is shipped.
+
+Full lifecycle, playback, revocation, trusted external access and a release gate
+were not rerun. No release or publication is authorized by this evidence.
+Private rollback archives, device evidence and screenshots remain outside Git.
+
+## Earlier acceptance evidence
+
+
 ## 2.37.2-0003 CLI 0.42.2 rebuild
 
 Rebuilt unchanged upstream 2.37.2 with published CLI 0.42.2, SDK/App 0.42.0,
