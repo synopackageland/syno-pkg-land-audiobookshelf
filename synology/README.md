@@ -2,9 +2,9 @@
 
 ## Current package
 
-Version **2.37.2-0002** packages unchanged upstream **v2.37.2** with
-SDK/App **0.38.2**, CLI **0.41.9**, templates **0.35.5** and executor
-**v0.38.2**. The App renders the upstream UI and has no SDK UI-kit dependency.
+Version **2.37.2-0003** packages unchanged upstream **v2.37.2** with
+SDK/App **0.42.0**, CLI **0.42.2**, templates **0.37.0** and executor
+**v0.39.0**. The App renders the upstream UI and has no SDK UI-kit dependency.
 Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
 ## Mobile and native clients
@@ -36,7 +36,7 @@ The browser root and `/audiobookshelf/` remain DSM-gated, as does
 existing packaging policy. Existing-token access is the intended boundary;
 mobile OIDC callback/onboarding and complete share HTML flows remain unverified.
 
-DSM package for upstream **v2.37.2**, SPK **2.37.2-0002**, x86_64,
+DSM package for upstream **v2.37.2**, SPK **2.37.2-0003**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
 All package-owned files are under this directory.
 
@@ -81,8 +81,8 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use SDK/App 0.38.2, CLI 0.41.9,
-templates 0.35.5 and executor/v0.38.2. Builds use the published packages and SDK modules.
+Release pins in `toolchain.json` use SDK/App 0.42.0, CLI 0.42.2,
+templates 0.37.0 and executor/v0.39.0. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and
 `SPL_RESOURCE_PREFIX`, then run `python3 scripts/build-linux.py`. It installs the
