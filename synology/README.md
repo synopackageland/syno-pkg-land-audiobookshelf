@@ -2,8 +2,8 @@
 
 ## Current package
 
-Version **2.37.2-0005** packages unchanged upstream **v2.37.2** with
-SDK/App **0.44.0**, CLI **0.44.0**, templates **0.38.1** and executor
+Version **2.37.2-0006** packages unchanged upstream **v2.37.2** with
+SDK/App **0.44.1**, CLI **0.44.0**, templates **0.38.1** and executor
 **v0.39.0**. The App renders the upstream UI and has no SDK UI-kit dependency.
 Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
@@ -13,13 +13,13 @@ Build and device acceptance are recorded in [validation.md](docs/validation.md).
 relative to this base; `identity_gateway.upstream_auth_paths` is exactly:
 
 ```text
-/api
-/auth/refresh
-/status
-/socket.io
-/hls
-/public
 /feed
+/public
+/hls
+/socket.io
+/status
+/auth/refresh
+/api
 ```
 
 These fixed prefixes are case-sensitive and match complete path segments.
@@ -38,7 +38,7 @@ The browser root and `/audiobookshelf/` remain DSM-gated, as does
 existing packaging policy. Existing-token access is the intended boundary;
 mobile OIDC callback/onboarding and complete share HTML flows remain unverified.
 
-DSM package for upstream **v2.37.2**, SPK **2.37.2-0005**, x86_64,
+DSM package for upstream **v2.37.2**, SPK **2.37.2-0006**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
 All package-owned files are under this directory.
 
@@ -84,7 +84,7 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use SDK/App 0.44.0, CLI 0.44.0,
+Release pins in `toolchain.json` use SDK/App 0.44.1, CLI 0.44.0,
 templates 0.38.1 and executor/v0.39.0. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and

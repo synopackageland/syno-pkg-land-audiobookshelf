@@ -1,5 +1,44 @@
 # Validation scope
 
+## 2.37.2-0006 SDK 0.44.1 installer fix
+
+Pin SDK/App **0.44.1** from published release commit
+`2f2a1d30c147b401267a3daff42eb9a3a01d8ba1`. CLI **0.44.0**, templates
+**0.38.1** and executor **v0.39.0** remain pinned. The gateway patch dispatches
+explicit installer commands before inspecting the inherited CGI environment.
+The application image, OIDC settings, path-prefix set and administrator-only
+admission stay unchanged. Prefix declarations use the same order as the verified
+upgrade artifact; the nonoverlapping path set and access behavior are unchanged.
+
+This rebuild passed the affected nonroot SDK entry-contract test, render
+freshness, CLI check/build/inspect (`findings=[]`) and scoped source/expanded-SPK
+privacy scans. The version-test source is unchanged; its previous 5/5 result
+is retained. The SDK release gate and previous App browser matrix were not rerun.
+
+The rebuilt SPK is **byte-for-byte identical** to the already tested published-SDK
+upgrade artifact: **37,557,760 bytes**, SHA-256
+`1e17a02c608c67319a393f32c03c90a0fba481ea3f67cc2f5523917159bd2232`.
+That artifact upgraded **0005 to 0006 through Package Center WebAPI**, using the
+published CLI installer, and reached running. The device log records zero exit
+codes for preupgrade, preinst, postinst, postupgrade, prestart and start, with
+**no 4541**. The incoming build-policy digest deliberately differed from 0005,
+covering the original failure condition. Library, stable users, progress,
+authentication settings and bootstrap-key hash comparisons all passed.
+
+The exact artifact match carries that existing WebAPI result to this rebuild;
+no duplicate upgrade, reinstall, downgrade or browser matrix was performed.
+Read-only package version/status confirms **0006 running**. No uninstall, user
+data deletion or DSM setting change was performed. Detailed artifact matching
+and bounded evidence are recorded in `build-proof.json`; private handoff logs
+remain outside Git.
+
+The prior administrator/ordinary-user/signed-out browser results below are
+retained with their original 0005 scope. **Administrator-only access is the
+required policy**; ordinary users receiving 403 is a passed authorization check.
+There is no pending request to widen access. The old CGI dispatch blocker is
+resolved for the WebAPI upgrade by SDK 0.44.1 and the verified 0006 artifact.
+Full lifecycle, media playback and release gates remain outside this task.
+
 ## 2.37.2-0005 custom DSM path ingress
 
 Published CLI/SDK/App **0.44.0**, templates **0.38.1**, executor **v0.39.0**.
@@ -33,9 +72,8 @@ to the disposable browser. No certificate trust or DSM settings were changed.
 
 ### Acceptance limits and installer defect
 
-The existing `admin-only` / `dsm-admins` rules are preserved. A permitted ordinary
-user cannot enter under that policy; that requested scenario remains unverified
-and needs an explicit policy decision. The tested ordinary-user outcome is denial.
+The existing `admin-only` / `dsm-admins` rules are preserved. Ordinary-user
+denial is the required and verified outcome; no access expansion is requested.
 
 The first CLI WebAPI upgrade attempt failed in `preupgrade` with
 `gateway entry policy does not match package build policy`. DSM restored 0004
@@ -43,9 +81,9 @@ and restarted it; library and progress comparisons passed after recovery.
 A read-only reproduction showed the published `ingress-check` succeeds normally,
 but with inherited `GATEWAY_INTERFACE=CGI/1.1` it enters CGI dispatch and loads
 the old installation policy. The same unmodified SPK then passed all native
-upgrade hooks through `synopkg install`. CLI WebAPI and Package Center upgrade
-are not accepted; the SDK gateway dispatch needs correction and a published
-rebuild before those flows can be claimed. No App-side bypass is shipped.
+upgrade hooks through `synopkg install`. This historical 0005
+failure is resolved by the published SDK 0.44.1 and WebAPI-tested 0006 artifact
+described above. No App-side bypass is shipped.
 
 Full lifecycle, playback, revocation, trusted external access and a release gate
 were not rerun. No release or publication is authorized by this evidence.
