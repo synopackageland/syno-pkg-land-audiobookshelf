@@ -1,5 +1,59 @@
 # Validation scope
 
+## 2.37.2-0005 custom DSM path ingress
+
+Published CLI/SDK/App **0.44.0**, templates **0.38.1**, executor **v0.39.0**.
+The official upstream image is unchanged. All edits remain under `synology/`.
+`build-proof.json` records the exact SPK hash and bounded acceptance results.
+
+The affected version tests passed 5/5. The SDK gateway entry-contract test passed
+as a nonroot process against both the manifest and the expanded SPK policy.
+It exercises scoped API prefixes, preserved credentials, reserved/protected
+routes and rejection outside the selected ingress. Render freshness, CLI check,
+x86_64 build and inspect passed with no inspect findings. Scoped source and
+expanded-SPK scans passed with the private denylist.
+
+An existing **2.37.2-0004** installation upgraded in place to **0005** through
+native `synopkg install`, without uninstalling or deleting data. Exact library
+and progress records, stable user IDs/roles, OIDC settings, media selection and
+bootstrap-key hashes were retained. The official running image, nonzero UID/GID,
+cap_drop ALL, no-new-privileges and read-only rootfs were independently checked.
+The old public port **30443** has no IPv4 or IPv6 listener; upstream **13378**
+and issuer **13380** remain bound to IPv4 loopback.
+
+A fresh browser opened the real DSM main-menu item and reached the App on the
+same DSM HTTPS origin under `/audiobookshelf/`. **23 distinct Nuxt JavaScript
+assets** loaded with HTTP 200 or valid 304 cache responses, with no failing
+App responses. The authenticated libraries API returned 200. Socket.IO used
+`/audiobookshelf/socket.io/`, connected over WebSocket and received frames.
+An ordinary signed-in user received HTTP 403 / `dsm_admin_required`. A fresh
+signed-out visitor saw DSM login without App content; its unauthenticated
+libraries API request returned 401. Self-signed certificate tolerance was limited
+to the disposable browser. No certificate trust or DSM settings were changed.
+
+### Acceptance limits and installer defect
+
+The existing `admin-only` / `dsm-admins` rules are preserved. A permitted ordinary
+user cannot enter under that policy; that requested scenario remains unverified
+and needs an explicit policy decision. The tested ordinary-user outcome is denial.
+
+The first CLI WebAPI upgrade attempt failed in `preupgrade` with
+`gateway entry policy does not match package build policy`. DSM restored 0004
+and restarted it; library and progress comparisons passed after recovery.
+A read-only reproduction showed the published `ingress-check` succeeds normally,
+but with inherited `GATEWAY_INTERFACE=CGI/1.1` it enters CGI dispatch and loads
+the old installation policy. The same unmodified SPK then passed all native
+upgrade hooks through `synopkg install`. CLI WebAPI and Package Center upgrade
+are not accepted; the SDK gateway dispatch needs correction and a published
+rebuild before those flows can be claimed. No App-side bypass is shipped.
+
+Full lifecycle, playback, revocation, trusted external access and a release gate
+were not rerun. No release or publication is authorized by this evidence.
+Private rollback archives, device evidence and screenshots remain outside Git.
+
+## Earlier acceptance evidence
+
+
 ## 2.37.2-0003 CLI 0.42.2 rebuild
 
 Rebuilt unchanged upstream 2.37.2 with published CLI 0.42.2, SDK/App 0.42.0,

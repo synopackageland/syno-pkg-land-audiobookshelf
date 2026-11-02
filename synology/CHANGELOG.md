@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.37.2-0005
+
+- Use DSM HTTPS path ingress at `/audiobookshelf/` with CLI/SDK/App 0.44.0 and templates 0.38.1
+- Remove the dedicated public gateway listener and installer port fields
+- Scope API, share, Socket.IO and OIDC callback declarations relative to the ingress base
+- Keep the official image, administrator-only entry, read-only media share and private data
+
 ## 2.37.2-0003
 
 - Rebuild unchanged upstream 2.37.2 with CLI 0.42.2 and SDK/App 0.42.0
