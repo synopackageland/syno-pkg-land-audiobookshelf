@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.37.2-0006
+
+- Pin SDK/App 0.44.1 to fix installer commands inheriting the DSM CGI environment
+- Keep CLI 0.44.0, templates 0.38.1 and executor/v0.39.0
+- Preserve administrator-only access and the same upstream-authenticated path set
+- Reproduce the exact artifact already verified by the 0005-to-0006 WebAPI upgrade
+
 ## 2.37.2-0005
 
 - Use DSM HTTPS path ingress at `/audiobookshelf/` with CLI/SDK/App 0.44.0 and templates 0.38.1

@@ -18,7 +18,7 @@ import (
 	gateway "github.com/synopackageland/syno-pkg-land-sdk/idgateway"
 )
 
-var expected = []string{"/api", "/auth/refresh", "/status", "/socket.io", "/hls", "/public", "/feed"}
+var expected = []string{"/feed", "/public", "/hls", "/socket.io", "/status", "/auth/refresh", "/api"}
 
 type fixtureDirectory struct{}
 
