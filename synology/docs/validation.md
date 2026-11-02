@@ -22,11 +22,11 @@ bootstrap key hash, native authentication settings, media library definitions an
 user IDs/permissions. The container image, nonzero package UID:GID, dropped ALL
 capabilities, no-new-privileges and read-only rootfs also match.
 
-An administrator signs into the DSM desktop and opens its generated launcher CGI
-(`/webman/3rdparty/SynoPkgAudiobookshelf/sso/open.cgi`); the upstream authenticated
-account link renders through the existing HTTPS gateway. A literal menu click
-was not established: invoking AppLaunch did not produce a new browser page,
-so the successful check navigated to the exact generated menu target instead.
+An administrator signs into the DSM desktop; a DOM click on the Audiobookshelf
+menu entry opens its generated launcher CGI
+(`/webman/3rdparty/SynoPkgAudiobookshelf/sso/open.cgi`). The upstream authenticated
+account link renders through the existing HTTPS gateway. Direct launcher CGI
+navigation also passes.
 The requested `/synopkgland/SynoPkgAudiobookshelf/` path returns HTTP 404.
 This manifest has no native `daemon.ingress`; CLI check accepts its existing
 Compose gateway route. The released fixed-prefix rule validates declared native

@@ -50,7 +50,7 @@
     "ready_marker": "#appbar a[href^=\"/audiobookshelf/account\"]",
     "requested_ingress": "/synopkgland/SynoPkgAudiobookshelf/",
     "requested_ingress_http_status": 404,
-    "literal_menu_click_verified": false
+    "dsm_menu_entry_dom_click": true
   },
   "lock_sha256": {
     "package-lock.json": "e5ea3b06a2999b748f0f05f4f6e7d54766053b088cb05d7e6cec5a1573d63f45",
