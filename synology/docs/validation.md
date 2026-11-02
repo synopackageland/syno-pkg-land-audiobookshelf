@@ -1,5 +1,43 @@
 # Validation scope
 
+## 2.37.2-0003 CLI 0.42.2 rebuild
+
+Rebuilt unchanged upstream 2.37.2 with published CLI 0.42.2, SDK/App 0.42.0,
+executor/v0.39.0 (the SDK 0.42.0 release mapping) and templates 0.37.0. There is no UI-kit dependency to update.
+All 122 npm lockfile download URLs use registry.npmjs.org. The live package
+feed did not list this package; the repository baseline is 2.37.2-0002 and no
+2.37.2 release tag exists, so this review candidate increments the build to 0003.
+No tag, release or catalog change is part of this rebuild.
+
+Existing version tests (5/5), the SDK-backed entry-policy test and render
+freshness pass. Check, build and inspect pass for x86_64, the only declared
+architecture; inspect has `findings=[]`. The detailed DSM format check retains
+two nonfatal warnings about SDK-generated restart-service INFO fields.
+The private-denylist scan and local-build-path scan pass over the integration
+and expanded SPK. `build-proof.json` records the artifact and lockfile hashes.
+
+One native in-place upgrade from 0002 to 0003 succeeds and Package Center reports
+running. Before/after comparisons preserve the selected port-value file hashes,
+bootstrap key hash, native authentication settings, media library definitions and
+user IDs/permissions. The container image, nonzero package UID:GID, dropped ALL
+capabilities, no-new-privileges and read-only rootfs also match.
+
+An administrator signs into the DSM desktop and opens its generated launcher CGI
+(`/webman/3rdparty/SynoPkgAudiobookshelf/sso/open.cgi`); the upstream authenticated
+account link renders through the existing HTTPS gateway. A literal menu click
+was not established: invoking AppLaunch did not produce a new browser page,
+so the successful check navigated to the exact generated menu target instead.
+The requested `/synopkgland/SynoPkgAudiobookshelf/` path returns HTTP 404.
+This manifest has no native `daemon.ingress`; CLI check accepts its existing
+Compose gateway route. The released fixed-prefix rule validates declared native
+daemon ingress and does not automatically migrate this Compose App. No new
+routing feature was added during the toolchain rebuild. The requested path is
+therefore an explicit remaining acceptance gap for coordinator review.
+
+No uninstall, data deletion, account changes, reboot, full e2e suite or full gate
+was performed. Normal-user and anonymous browser checks were not repeated in
+this administrator-only upgrade scope. Earlier evidence below is historical.
+
 ## 2.37.2-0002 SDK 0.38.2 rebuild
 
 Pinned CLI 0.41.9, templates 0.35.5 and SDK/App 0.38.2, using published npm
