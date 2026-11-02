@@ -1,7 +1,7 @@
 {
-  "version": "2.37.2-0006",
+  "version": "2.37.2-0007",
   "toolchain": {
-    "cli": "0.44.0",
+    "cli": "0.47.1",
     "templates": "0.38.1",
     "sdk": "0.44.1",
     "app": "0.44.1",
@@ -17,23 +17,24 @@
   },
   "official_image": "docker.io/advplyr/audiobookshelf:2.37.2@sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
   "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.2-0006-x86_64.spk": "1e17a02c608c67319a393f32c03c90a0fba481ea3f67cc2f5523917159bd2232"
+    "SynoPkgAudiobookshelf-2.37.2-0007-x86_64.spk": "c51cb032692edf03b6456b0e61f79441b63cd89db60b15c327f79076985fe54c"
   },
   "artifact_bytes": 37557760,
   "inspect_findings": [],
-  "validation_scope": "SDK 0.44.1 rebuild: affected nonroot entry-contract test, render freshness, check/build/inspect and scoped source/expanded-SPK scans. The rebuilt SPK is byte-identical to the artifact already validated through Package Center WebAPI from 0005 to 0006, so that upgrade and the earlier browser matrix were not repeated. Administrator-only admission is the required policy. No full lifecycle or release gate.",
+  "validation_scope": "CLI 0.47.1 rebuild with SDK/App 0.44.1 unchanged: 5 version tests, render freshness, check/build/inspect, generated data-share/wizard review, scoped source and expanded-SPK privacy scans, and one actual Package Center WebAPI upgrade from 0006 to 0007. Stable libraries/users/progress/auth settings/private hashes are preserved. Earlier browser and SDK entry-contract evidence retains its original version scope; no full lifecycle or fresh wizard UI acceptance is claimed.",
   "local_tests": {
     "version": {
       "passed": 5,
-      "reused_unchanged_test_source": true,
-      "validated_for_version": "2.37.2-0005"
+      "reused_unchanged_test_source": false
     },
     "entry_contract": {
       "passed": 1,
       "sdk": "0.44.1",
-      "execution": "go test -exec go-nonroot-exec"
+      "execution": "go test -exec go-nonroot-exec",
+      "reused_unchanged_sdk_and_test_source": true,
+      "validated_for_version": "2.37.2-0006"
     },
-    "packaged_policy": "validated by inspect and exact tested-artifact equality"
+    "packaged_policy": "validated by CLI 0.47.1 inspect"
   },
   "public_content_scan": true,
   "spk_content_scan": true,
@@ -41,18 +42,10 @@
     "count": 122,
     "all_official": true
   },
-  "artifact_equivalence": {
-    "rebuilt_sha256": "1e17a02c608c67319a393f32c03c90a0fba481ea3f67cc2f5523917159bd2232",
-    "webapi_tested_sha256": "1e17a02c608c67319a393f32c03c90a0fba481ea3f67cc2f5523917159bd2232",
-    "byte_identical": true,
-    "bytes": 37557760,
-    "webapi_tested_version": "2.37.2-0006",
-    "upgrade_repeated": false
-  },
   "installation": {
     "action": "upgrade",
-    "from": "2.37.2-0005",
-    "version": "2.37.2-0006",
+    "from": "2.37.2-0006",
+    "version": "2.37.2-0007",
     "status": "running",
     "transport": "Package Center WebAPI",
     "webapi_upgrade_accepted": true,
@@ -88,11 +81,15 @@
       "users": true,
       "progress": true,
       "authSettings": true,
-      "bootstrapKeyHash": true
+      "config.jsonHash": true,
+      "bootstrap-api-keyHash": true
     },
-    "evidence_reused": true,
-    "installed_artifact_byte_identical": true,
-    "read_only_running_state_reconfirmed": true,
+    "evidence_reused": false,
+    "upgrade_requests": 1,
+    "existing_folder_submitted": true,
+    "folder_changed": false,
+    "data_share_acquired": true,
+    "media_readable": true,
     "no_uninstall_or_data_deletion": true
   },
   "browser": {
@@ -130,12 +127,22 @@
     "reuse_basis": "Identical application image, container configuration, ingress path, auth rules and path-prefix set; SDK patch only corrects explicit-command dispatch under CGI environment."
   },
   "lock_sha256": {
-    "package-lock.json": "28314fb16099dbe86d08c0ede4e83555a27608975f5c84a27c20133938902af9",
+    "package-lock.json": "7586e8dc988ae4855d35959872a45a558518c2098382630a57d4d6a1bc1a8c72",
     "tests/entry/go.sum": "ac77edb102c6bde09e3a9fa101334c50d25d1afbe0659bf1e95beb0ea364cdc8"
   },
   "device_acceptance_complete": true,
   "requested_acceptance_complete": true,
   "scoped_browser_checks_complete": true,
   "release_smoke_complete": false,
-  "remaining": []
+  "remaining": [],
+  "shared_folder": {
+    "mechanism": "DSM data-share",
+    "selection_variable": "media",
+    "permission": "ro",
+    "package_account": "SynoPkgAudiobookshelf",
+    "generated_upgrade_wizard_checked": true,
+    "interactive_wizard_rerun": false,
+    "fresh_share_without_prior_acl_tested": false,
+    "retained_selection_render_test": true
+  }
 }

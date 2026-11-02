@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.37.2-0007
+
+- Pin CLI 0.47.1 for DSM data-share grants on selected existing Shared Folders
+- Use the generated upgrade wizard's retained folder selection and native grant
+- Keep SDK/App 0.44.1, administrator-only ingress, the official image and read-only media
+- Validate one in-place WebAPI upgrade from 0006 without repeating broader acceptance
+
 ## 2.37.2-0006
 
 - Pin SDK/App 0.44.1 to fix installer commands inheriting the DSM CGI environment

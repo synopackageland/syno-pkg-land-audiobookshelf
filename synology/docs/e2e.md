@@ -51,9 +51,10 @@ real signed-in DSM account without App permission is denied. These are independe
 
 For the authorized disposable media fixture, create a uniquely named DSM Shared
 Folder containing `audiobooks/Proof Author/Proof Book/{01,02}.mp3` synthetic audio.
-Select it during native installation, grant the package account read-only access,
-and independently prove read denial before the grant, read success after it and
-container write refusal. Use `ABS_E2E_MEDIA_PATH=/media/audiobooks` (the default).
+Select it during native installation so DSM data-share grants the package
+account read-only access. Independently prove read denial before installation,
+read success after the native grant and container write refusal; do not add an
+App-side ACL writer or require a pre-existing package-account grant. Use `ABS_E2E_MEDIA_PATH=/media/audiobooks` (the default).
 Run with `ABS_E2E_CREATE_LIBRARY=1` to create `Proof Audio` through the upstream UI
 and play it. The test requires an actual nonempty HTTP 200/206 audio response and
 an advancing audio element. The read-only API calls locate the created library;

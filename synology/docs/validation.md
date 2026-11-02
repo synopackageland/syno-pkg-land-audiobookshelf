@@ -1,5 +1,36 @@
 # Validation scope
 
+## 2.37.2-0007 CLI 0.47.1 shared-folder rebuild
+
+Pin published CLI **0.47.1**; SDK/App **0.44.1**, templates **0.38.1** and
+executor **v0.39.0** stay unchanged. The official image, administrator-only
+policy, same-origin ingress and read-only media selection are preserved.
+The generated resource now uses the selected `media` variable in DSM data-share
+with package-account RO permission. The generated upgrade wizard rendered an existing folder from a local retained
+configuration, without a separate change checkbox; supported-folder validation
+was inspected. No App ACL writer is added.
+
+The five version tests, render freshness, check/build/inspect (`findings=[]`),
+official registry lock URLs and scoped source/expanded-SPK scans passed.
+Artifact: **37,557,760 bytes**, SHA-256
+`c51cb032692edf03b6456b0e61f79441b63cd89db60b15c327f79076985fe54c`.
+
+Exactly **one Package Center WebAPI upgrade, 0006 to 0007**, completed and reached
+running, without error **4541**. It explicitly submitted the existing saved
+folder to the new installer; the selection did not change. The device log records
+zero exit codes for preupgrade, preinst, postinst, postupgrade, prestart and start,
+and successful DSM data-share acquisition. The installed resource retains the
+selected-folder RO grant, the running container reads `/media`, and the official
+image/nonroot/cap_drop ALL/no-new-privileges/read-only-rootfs settings remain.
+Library records, stable user IDs/roles, progress, OIDC settings, saved-folder
+configuration and bootstrap-key hashes compare equal before and after upgrade.
+
+The full browser/lifecycle matrix was not repeated. This run verifies retained
+folder upgrade and generated wizard/resource behavior; it does not claim a fresh
+interactive wizard run or a new-share grant with no prior ACL. Earlier browser
+and SDK entry-contract evidence below keeps its original version scope. No merge,
+tag, release or publication was performed.
+
 ## 2.37.2-0006 SDK 0.44.1 installer fix
 
 Pin SDK/App **0.44.1** from published release commit
