@@ -67,10 +67,10 @@ async function media(reader: any, create: boolean) {
   const contents = await reader.evaluate(async () => {
     const token = (window as any).$nuxt.$store.state.user.accessToken;
     const headers = {Authorization: 'Bearer ' + token};
-    const reply = await (await fetch('/api/libraries', {headers})).json();
+    const reply = await (await fetch('/audiobookshelf/api/libraries', {headers})).json();
     const library = reply.libraries.find((item: any) => item.name === 'Proof Audio');
     if (!library) return null;
-    const books = await (await fetch('/api/libraries/' + library.id + '/items', {headers})).json();
+    const books = await (await fetch('/audiobookshelf/api/libraries/' + library.id + '/items', {headers})).json();
     return {libraryId: library.id, itemId: books.results?.[0]?.id};
   });
   expect(contents?.libraryId).toBeTruthy();
@@ -163,7 +163,7 @@ test('an unauthorized ordinary DSM user receives HTTP 403',
     await desktop(app, 'ordinary');
     const page = dsmPage();
     await registerDsmSecrets(page);
-    const url = new URL(page.url()); url.protocol = 'https:'; url.port = '30443'; url.pathname = '/'; url.search = '';
+    const url = new URL(page.url()); url.protocol = 'https:'; url.pathname = '/audiobookshelf/'; url.search = '';
     await (await page.context().newCDPSession(page)).send('Security.setIgnoreCertificateErrors', {ignore: true});
     const reader = await page.context().newPage();
     reader.proofResponses = [];
@@ -172,7 +172,7 @@ test('an unauthorized ordinary DSM user receives HTTP 403',
     await (await page.context().browser().newBrowserCDPSession()).send('Security.setIgnoreCertificateErrors', {ignore: true});
     try {
       // A native authorization hop is needed before a DSM role can be checked.
-      const denied = reader.waitForResponse(response => new URL(response.url()).pathname === '/_sso/dsm-return' && response.status() === 403);
+      const denied = reader.waitForResponse(response => new URL(response.url()).pathname === '/audiobookshelf/_sso/dsm-return' && response.status() === 403);
       await reader.goto(url.href, {waitUntil: 'domcontentloaded'});
       const response = await denied;
       await reader.locator('[data-error-code=dsm_admin_required]').waitFor();

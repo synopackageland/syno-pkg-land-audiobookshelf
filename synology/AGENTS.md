@@ -13,7 +13,9 @@ through supported APIs; never edit its database or add another identity service.
 
 Use install.sharedFolder mode dedicated with matching compose.shares select install.
 Default media access is read-only; DSM creates the app-named share and grants
-the package identity RO access. Existing shares need validated package-user ACLs.
+the package identity RO access. Existing selections authorize DSM data-share
+to grant the declared package-user access. Validate supported folders at installation and kernel access at runtime;
+do not require a pre-existing grant or add an App-side ACL writer.
 Keep entry admin-only and gateway dsm-admins. The normal-user smoke must verify
 the SDK access-denied page; never widen entry to satisfy smoke. Do not claim account deletion
 or immediate session revocation until the native bridge is implemented and tested.

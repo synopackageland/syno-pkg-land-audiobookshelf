@@ -16,8 +16,9 @@ normal account administrator privileges or widen the entry for smoke.
 The CLI's DSM target accepts self-signed DSM and gateway certificates before
 navigation. Use the reachable DSM HTTPS URL in `DSM_E2E_URL`; no HTTP-only
 certificate workaround or App-side TLS override is needed. When network access
-requires an operator-owned SSH tunnel, forward the selected gateway and native
-DSM callback ports as well and close the tunnel after the run. No router port
+requires an operator-owned SSH tunnel, forward the native DSM HTTPS/callback
+ports and close the tunnel after the run. The App uses `/audiobookshelf/` on that
+same DSM origin; no dedicated gateway port is needed. No router port
 forwarding is required.
 
 The existing extended suite remains available through `npm run e2e:nas`.
@@ -35,7 +36,7 @@ Set `DSM_E2E_URL`, `DSM_E2E_TARGET`, `DSM_E2E_ACCOUNT_ADMIN`,
 `DSM_E2E_ACCOUNT_ORDINARY`, `DSM_E2E_PROFILE_DIR`, and `DSM_E2E_OUTPUT_DIR`.
 The output path must be under the ignored `synology/.e2e/` directory; archive it
 privately afterward. Open caller-owned forwards for DSM's native callback ports
-and gateway 30443; never cancel another operator's forward.
+for the same-origin ingress; never cancel another operator's forward.
 
 Set `ABS_E2E_TRUST_GATEWAY=1` only for explicit certificate-error tolerance in
 this disposable test browser. This does not modify DSM, add system trust or prove
@@ -50,9 +51,10 @@ real signed-in DSM account without App permission is denied. These are independe
 
 For the authorized disposable media fixture, create a uniquely named DSM Shared
 Folder containing `audiobooks/Proof Author/Proof Book/{01,02}.mp3` synthetic audio.
-Select it during native installation, grant the package account read-only access,
-and independently prove read denial before the grant, read success after it and
-container write refusal. Use `ABS_E2E_MEDIA_PATH=/media/audiobooks` (the default).
+Select it during native installation so DSM data-share grants the package
+account read-only access. Independently prove read denial before installation,
+read success after the native grant and container write refusal; do not add an
+App-side ACL writer or require a pre-existing package-account grant. Use `ABS_E2E_MEDIA_PATH=/media/audiobooks` (the default).
 Run with `ABS_E2E_CREATE_LIBRARY=1` to create `Proof Audio` through the upstream UI
 and play it. The test requires an actual nonempty HTTP 200/206 audio response and
 an advancing audio element. The read-only API calls locate the created library;

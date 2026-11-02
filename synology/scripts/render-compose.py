@@ -13,7 +13,7 @@ rendered = json.dumps({'services': {'web': {
     'environment': {'HOST': '127.0.0.1', 'PORT': '13378',
                     'CONFIG_PATH': '/var/tmp/audiobookshelf/config',
                     'METADATA_PATH': '/var/tmp/audiobookshelf/metadata',
-                    'ROUTER_BASE_PATH': '/audiobookshelf', 'TZ': 'UTC'},
+                    'ROUTER_BASE_PATH': '/audiobookshelf', 'ABS_OIDC_PORT': '13380', 'TZ': 'UTC'},
     'read_only': True,
     'volumes': ['data:/var/tmp'], 'tmpfs': ['/tmp:mode=1777'],
     'restart': 'unless-stopped', 'stop_grace_period': '30s',
