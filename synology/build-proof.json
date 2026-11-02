@@ -1,43 +1,41 @@
 {
-  "version": "2.37.2-0002",
+  "version": "2.37.2-0003",
   "toolchain": {
-    "cli": "0.41.9",
-    "templates": "0.35.5",
-    "sdk": "0.38.2",
-    "app": "0.38.2",
+    "cli": "0.42.2",
+    "templates": "0.37.0",
+    "sdk": "0.42.0",
+    "app": "0.42.0",
     "ui": null,
-    "executorTag": "executor/v0.38.2",
+    "executorTag": "executor/v0.39.0",
     "goToolchain": "go1.26.10"
   },
   "checks": {
+    "check": true,
     "build": true,
-    "inspect": true,
-    "public_content_scan": true,
-    "spk_content_scan": true,
-    "installation": true
+    "inspect": true
   },
-  "validation_scope": "CLI 0.41.9 rebuild, inspect, in-place upgrade and app-open A/N/X only; full e2e, regression and broader lifecycle acceptance were not rerun.",
   "official_image": "docker.io/advplyr/audiobookshelf:2.37.2@sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
   "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.2-0002-x86_64.spk": "cc2515cfb33d10aa3fac2984dbec4fbaafcd9150a2817c5119c729a1d237e704"
+    "SynoPkgAudiobookshelf-2.37.2-0003-x86_64.spk": "0dd39be1d4782e2bbb572f9be929f57c27df1ec4ae3262a7e1c0bb83c36e4da5"
   },
   "inspect_findings": [],
-  "publishable": true,
-  "device_acceptance_complete": false,
-  "release_smoke_complete": true,
-  "smoke": {
-    "A": "passed: authenticated upstream UI ready",
-    "N": "passed: non-admin SDK access-denied page, no App content",
-    "X": "passed: fresh anonymous DSM sign-in gate"
+  "validation_scope": "Existing version and entry-policy tests, render freshness, check/build/inspect for the only declared architecture x86_64, one in-place upgrade, stable-setting comparison and administrator DSM launcher CGI open only. No full gate or full e2e run.",
+  "public_content_scan": true,
+  "spk_content_scan": true,
+  "registry_urls": {
+    "count": 122,
+    "all_official": true
   },
   "installation": {
     "action": "upgrade",
+    "from": "2.37.2-0002",
+    "version": "2.37.2-0003",
     "status": "running",
-    "dsm": "7.3.2-86009",
-    "share": "Audiobookshelf",
-    "permission": "ro",
-    "gateway_https": 30443,
-    "oidc_issuer": 13380,
+    "stable_settings_preserved": true,
+    "libraries_preserved": true,
+    "users_preserved": true,
+    "oidc_settings_preserved": true,
+    "bootstrap_key_preserved": true,
     "nonroot": true,
     "cap_drop": [
       "ALL"
@@ -45,16 +43,21 @@
     "no_new_privileges": true,
     "read_only_rootfs": true
   },
-  "lock_sha256": {
-    "package-lock.json": "9ca28c363d6506618ab82b0c37830108deb7c4a891df3243b63b5682cfc16070",
-    "tests/entry/go.sum": "0e611e1161da9bf75284dbe95c6905af945a8c9cd0800dd418f8eaead9b5862a"
+  "browser": {
+    "administrator_desktop": true,
+    "menu_target": "/webman/3rdparty/SynoPkgAudiobookshelf/sso/open.cgi",
+    "launcher_cgi_app_ready": true,
+    "ready_marker": "#appbar a[href^=\"/audiobookshelf/account\"]",
+    "requested_ingress": "/synopkgland/SynoPkgAudiobookshelf/",
+    "requested_ingress_http_status": 404,
+    "dsm_menu_entry_dom_click": true
   },
-  "requested_acceptance_complete": true,
-  "smoke_summary": {
-    "selected": 3,
-    "executed": 3,
-    "passed": 3,
-    "failed": 0,
-    "skipped": 0
-  }
+  "lock_sha256": {
+    "package-lock.json": "e5ea3b06a2999b748f0f05f4f6e7d54766053b088cb05d7e6cec5a1573d63f45",
+    "tests/entry/go.sum": "15b062567eaa1548640cc72179851f672b24444103e28fd165af370a3176f20d"
+  },
+  "device_acceptance_complete": false,
+  "release_smoke_complete": false,
+  "requested_acceptance_complete": false,
+  "remaining": "The requested same-origin ingress is absent; the existing Compose gateway launch succeeds. Coordinator review is required before treating that path requirement as satisfied."
 }
