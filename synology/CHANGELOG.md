@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.37.2-0003
+
+- Rebuild unchanged upstream 2.37.2 with CLI 0.42.2 and SDK/App 0.42.0
+- Align the explicit templates pin with CLI 0.42.2 at published version 0.37.0
+- Preserve the immutable upstream image, administrator-only entry and dedicated read-only share
+- Prepare a review-only rebuild without a tag, release or catalog change
+
 ## 2.37.2-0002
 
 - Repackage upstream 2.37.2 with SDK/App 0.38.2, CLI 0.41.9 and templates 0.35.5
