@@ -3,9 +3,9 @@
 
 ## Current package
 
-Version **2.37.2-0011** packages unchanged upstream **v2.37.2** with
-SDK/App **0.53.23**, CLI **0.52.15**, templates **0.41.5** and executor
-**v0.53.5**. The App renders the upstream UI and has no SDK UI-kit dependency.
+Version **2.37.2-0012** packages unchanged upstream **v2.37.2** with
+SDK/App **0.53.25**, CLI **0.52.16**, templates **0.41.5** and executor
+**v0.53.6**. The App renders the upstream UI and has no SDK UI-kit dependency.
 Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
 ## Mobile and native clients
@@ -39,7 +39,7 @@ The browser root and `/audiobookshelf/` remain DSM-gated, as does
 existing packaging policy. Existing-token access is the intended boundary;
 mobile OIDC callback/onboarding and complete share HTML flows remain unverified.
 
-DSM package for upstream **v2.37.2**, SPK **2.37.2-0011**, x86_64,
+DSM package for upstream **v2.37.2**, SPK **2.37.2-0012**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
 All package-owned files are under this directory.
 
@@ -68,7 +68,8 @@ Configuration, metadata and a private bootstrap API key live in the namespaced
 `data` volume under `/var/tmp/audiobookshelf`. SDK `storage_init` creates private
 0700 directories and supplies bootstrap/OIDC secrets. The container runs as the
 package UID:GID, drops all capabilities, uses no-new-privileges, a read-only root
-filesystem and temporary `/tmp`. Upstream listeners bind IPv4 loopback. Host
+filesystem and SDK disk scratch at `/tmp` (`TMPDIR=/tmp`; package UID, mode
+0700, emptied at every container start; no memory tmpfs). Upstream listeners bind IPv4 loopback. Host
 networking and internet egress are explicit; there is no egress allowlist.
 
 **Uninstall retains named container data volumes even with delete-data selected.**
@@ -77,8 +78,8 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use SDK/App 0.53.23, CLI 0.52.15,
-templates 0.41.5 and executor/v0.53.5. Builds use the published packages and SDK modules.
+Release pins in `toolchain.json` use SDK/App 0.53.25, CLI 0.52.16,
+templates 0.41.5 and executor/v0.53.6. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and
 `SPL_RESOURCE_PREFIX`, then run `python3 scripts/build-linux.py`. It installs the

@@ -1,15 +1,17 @@
 {
-  "version": "2.37.2-0011",
+  "version": "2.37.2-0012",
   "toolchain": {
-    "cli": "0.52.15",
+    "cli": "0.52.16",
     "templates": "0.41.5",
-    "sdk": "0.53.23",
-    "app": "0.53.23",
+    "sdk": "0.53.25",
+    "app": "0.53.25",
     "ui": null,
-    "executorTag": "executor/v0.53.5",
+    "executorTag": "executor/v0.53.6",
     "goToolchain": "go1.26.10"
   },
   "checks": {
+    "tests": true,
+    "render_fresh": true,
     "check": true,
     "build_baseline": true,
     "inspect_baseline": true,
@@ -19,28 +21,28 @@
   "inspect_findings": [],
   "approval_retention": "unknown",
   "privileges_unchanged": true,
-  "container_policy_unchanged": true,
   "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.2-0011-x86_64.spk": "dede8cdce53e85def863118530f8ca16f2ebcf9f9578e429191d4f80f912c898"
+    "SynoPkgAudiobookshelf-2.37.2-0012-x86_64.spk": "51a7c7d2f62b37d0d906410159a3091c4e5e6f6ba9205173b5b4e65dc8c9f271"
   },
-  "folder_tests": {
-    "passed": 5,
-    "failed": 0,
-    "skipped": 0
+  "temporary_files": {
+    "scratch": [
+      "/tmp"
+    ],
+    "tmpfs": [],
+    "TMPDIR": "/tmp"
   },
   "device": {
-    "dsm": "7.3.2",
-    "legacy_silent_upgrade": true,
-    "legacy_wizard_upgrade": true,
-    "original_share_root_kept": true,
-    "package_uid_kept": true,
-    "fixture_content_kept": true,
-    "nonroot_read": true,
-    "readonly_write_denied": true,
-    "effective_and_permitted_capabilities_zero": true,
-    "english_wizard_intro_and_heading": true,
+    "dsm": "7.4.1",
+    "upgrade_from": "2.37.2-0011",
+    "running": true,
+    "tmp_on_disk": true,
+    "tmp_mode": "0700",
+    "tmp_owner_package_uid": true,
+    "tmp_writable": true,
+    "healthcheck_200": true,
+    "admin_main_page": true,
     "cleanup_complete": true
   },
   "review_ready": true,
-  "validation_scope": "Published dependency rebuild, historical baseline inspection, five folder/render regressions and two previous-official upgrades per App; broader suites and two-level fresh installation were not repeated"
+  "validation_scope": "SDK 0.53.25 disk-scratch rebuild: unit/entry tests, render, check, baseline build/inspect and one previous-official upgrade on one DSM 7.4.1 device; broader suites were not repeated"
 }
