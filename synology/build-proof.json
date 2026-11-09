@@ -1,45 +1,46 @@
 {
   "version": "2.37.2-0011",
   "toolchain": {
-    "cli": "0.52.14",
+    "cli": "0.52.15",
     "templates": "0.41.5",
-    "sdk": "0.53.22",
-    "app": "0.53.22",
+    "sdk": "0.53.23",
+    "app": "0.53.23",
     "ui": null,
     "executorTag": "executor/v0.53.5",
     "goToolchain": "go1.26.10"
   },
   "checks": {
     "check": true,
+    "build_baseline": true,
+    "inspect_baseline": true,
     "build": true,
-    "inspect": true,
-    "build_baseline": false,
-    "inspect_baseline": false
-  },
-  "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.2-0011-x86_64.spk": "d64a21c68e7e129761589af9dcb96da9fb91cc1d5d81bc819914ba5990ed19bc"
+    "inspect": true
   },
   "inspect_findings": [],
+  "approval_retention": "unknown",
+  "privileges_unchanged": true,
+  "container_policy_unchanged": true,
+  "artifacts": {
+    "SynoPkgAudiobookshelf-2.37.2-0011-x86_64.spk": "dede8cdce53e85def863118530f8ca16f2ebcf9f9578e429191d4f80f912c898"
+  },
   "folder_tests": {
-    "passed": 4,
-    "failed": 1,
+    "passed": 5,
+    "failed": 0,
     "skipped": 0
   },
   "device": {
     "dsm": "7.3.2",
-    "fresh_two_level_folder": true,
+    "legacy_silent_upgrade": true,
+    "legacy_wizard_upgrade": true,
+    "original_share_root_kept": true,
+    "package_uid_kept": true,
+    "fixture_content_kept": true,
     "nonroot_read": true,
     "readonly_write_denied": true,
-    "legacy_upgrade_prefill": false,
-    "legacy_omitted_answer_upgrade": false,
-    "saved_selection_hash_unchanged_after_failed_upgrade": true,
+    "effective_and_permitted_capabilities_zero": true,
+    "english_wizard_intro_and_heading": true,
     "cleanup_complete": true
   },
-  "publishable": false,
-  "waiting_for": "CLI 0.52.15 / SDK 0.53.23",
-  "blockers": [
-    "legacy upgrade wizard clears saved share",
-    "legacy root selection is rejected in preinst",
-    "baseline rejects previous official wizard"
-  ]
+  "review_ready": true,
+  "validation_scope": "Published dependency rebuild, historical baseline inspection, five folder/render regressions and two previous-official upgrades per App; broader suites and two-level fresh installation were not repeated"
 }

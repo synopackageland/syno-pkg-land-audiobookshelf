@@ -18,7 +18,7 @@ capabilities: {composeMounts: true}
 install:
   sharedFolder: {mode: select, key: media, permission: ro, picker: folder}
 compose:
-  sdk: 0.53.22
+  sdk: 0.53.23
   shares:
     media:
       select: install
@@ -43,7 +43,7 @@ compose:
   network: {egress: internet}
 identity_gateway:
   upstream_auth_paths: [/feed, /public, /hls, /socket.io, /status, /auth/refresh, /api]
-  sdk: 0.53.22
+  sdk: 0.53.23
   mode: oidc
   access: dsm-admins
   ingress: {path: /audiobookshelf/}

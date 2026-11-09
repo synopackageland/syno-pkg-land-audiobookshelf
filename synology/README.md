@@ -1,13 +1,10 @@
 # Audiobookshelf for DSM
 
-This folder-picker candidate is blocked by legacy upgrade wizard prefill and
-CLI baseline compatibility; see [validation](docs/validation.md). Do not release it.
-
 
 ## Current package
 
 Version **2.37.2-0011** packages unchanged upstream **v2.37.2** with
-SDK/App **0.53.22**, CLI **0.52.14**, templates **0.41.5** and executor
+SDK/App **0.53.23**, CLI **0.52.15**, templates **0.41.5** and executor
 **v0.53.5**. The App renders the upstream UI and has no SDK UI-kit dependency.
 Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
@@ -80,7 +77,7 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use SDK/App 0.53.22, CLI 0.52.14,
+Release pins in `toolchain.json` use SDK/App 0.53.23, CLI 0.52.15,
 templates 0.41.5 and executor/v0.53.5. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and
