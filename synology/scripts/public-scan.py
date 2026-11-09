@@ -15,7 +15,7 @@ if not args.denylist:
     raise SystemExit('Set SPL_INTERNAL_DENYLIST to the private operator denylist')
 denied = [line for line in Path(args.denylist).read_bytes().splitlines() if line]
 pattern = re.compile('|'.join([
-    't-' + '0[0-9]{3}', 'vt' + '-nas', 'vt' + '-62', 'nas' + '96',
+    't-' + '[0-9]{4}', 'vt' + '-nas', 'vt' + '-62', 'nas' + '96',
     'fran' + 'cis', 'sa' + '3400', 'sa' + '3200', 'new' + 'admin',
     'nor' + 'mal[1-3]', r'10' + r'\.17\.', 'vin' + 'centt',
     'her' + 'dr', 'ku' + 'ma', r'synology' + r'\.com', 'for' + 'ti',

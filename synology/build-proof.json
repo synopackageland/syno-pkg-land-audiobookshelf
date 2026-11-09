@@ -1,148 +1,46 @@
 {
-  "version": "2.37.2-0007",
+  "version": "2.37.2-0011",
   "toolchain": {
-    "cli": "0.47.1",
-    "templates": "0.38.1",
-    "sdk": "0.44.1",
-    "app": "0.44.1",
+    "cli": "0.52.15",
+    "templates": "0.41.5",
+    "sdk": "0.53.23",
+    "app": "0.53.23",
     "ui": null,
-    "executorTag": "executor/v0.39.0",
+    "executorTag": "executor/v0.53.5",
     "goToolchain": "go1.26.10"
   },
-  "sdk_release_commit": "2f2a1d30c147b401267a3daff42eb9a3a01d8ba1",
   "checks": {
     "check": true,
+    "build_baseline": true,
+    "inspect_baseline": true,
     "build": true,
     "inspect": true
   },
-  "official_image": "docker.io/advplyr/audiobookshelf:2.37.2@sha256:b897c33f05972fb1bf484f7487bc878fa91ec8691335c1db6e2929c3a7658efa",
-  "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.2-0007-x86_64.spk": "c51cb032692edf03b6456b0e61f79441b63cd89db60b15c327f79076985fe54c"
-  },
-  "artifact_bytes": 37557760,
   "inspect_findings": [],
-  "validation_scope": "CLI 0.47.1 rebuild with SDK/App 0.44.1 unchanged: 5 version tests, render freshness, check/build/inspect, generated data-share/wizard review, scoped source and expanded-SPK privacy scans, and one actual Package Center WebAPI upgrade from 0006 to 0007. Stable libraries/users/progress/auth settings/private hashes are preserved. Earlier browser and SDK entry-contract evidence retains its original version scope; no full lifecycle or fresh wizard UI acceptance is claimed.",
-  "local_tests": {
-    "version": {
-      "passed": 5,
-      "reused_unchanged_test_source": false
-    },
-    "entry_contract": {
-      "passed": 1,
-      "sdk": "0.44.1",
-      "execution": "go test -exec go-nonroot-exec",
-      "reused_unchanged_sdk_and_test_source": true,
-      "validated_for_version": "2.37.2-0006"
-    },
-    "packaged_policy": "validated by CLI 0.47.1 inspect"
+  "approval_retention": "unknown",
+  "privileges_unchanged": true,
+  "container_policy_unchanged": true,
+  "artifacts": {
+    "SynoPkgAudiobookshelf-2.37.2-0011-x86_64.spk": "dede8cdce53e85def863118530f8ca16f2ebcf9f9578e429191d4f80f912c898"
   },
-  "public_content_scan": true,
-  "spk_content_scan": true,
-  "registry_urls": {
-    "count": 122,
-    "all_official": true
+  "folder_tests": {
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
   },
-  "installation": {
-    "action": "upgrade",
-    "from": "2.37.2-0006",
-    "version": "2.37.2-0007",
-    "status": "running",
-    "transport": "Package Center WebAPI",
-    "webapi_upgrade_accepted": true,
-    "error_4541": false,
-    "hooks": [
-      {
-        "phase": "preupgrade",
-        "exit": 0
-      },
-      {
-        "phase": "preinst",
-        "exit": 0
-      },
-      {
-        "phase": "postinst",
-        "exit": 0
-      },
-      {
-        "phase": "postupgrade",
-        "exit": 0
-      },
-      {
-        "phase": "start-stop-status prestart",
-        "exit": 0
-      },
-      {
-        "phase": "start-stop-status start",
-        "exit": 0
-      }
-    ],
-    "retention": {
-      "libraries": true,
-      "users": true,
-      "progress": true,
-      "authSettings": true,
-      "config.jsonHash": true,
-      "bootstrap-api-keyHash": true
-    },
-    "evidence_reused": false,
-    "upgrade_requests": 1,
-    "existing_folder_submitted": true,
-    "folder_changed": false,
-    "data_share_acquired": true,
-    "media_readable": true,
-    "no_uninstall_or_data_deletion": true
+  "device": {
+    "dsm": "7.3.2",
+    "legacy_silent_upgrade": true,
+    "legacy_wizard_upgrade": true,
+    "original_share_root_kept": true,
+    "package_uid_kept": true,
+    "fixture_content_kept": true,
+    "nonroot_read": true,
+    "readonly_write_denied": true,
+    "effective_and_permitted_capabilities_zero": true,
+    "english_wizard_intro_and_heading": true,
+    "cleanup_complete": true
   },
-  "browser": {
-    "administrator_desktop_menu": true,
-    "menu_target": "/webman/3rdparty/SynoPkgAudiobookshelf/sso/open.cgi",
-    "same_origin_ingress": "/audiobookshelf/",
-    "app_ready": true,
-    "nuxt_javascript_assets": 23,
-    "nuxt_statuses": [
-      200,
-      304
-    ],
-    "failed_ingress_responses": 0,
-    "api_status": 200,
-    "socket_io": {
-      "path": "/audiobookshelf/socket.io/",
-      "transport": "websocket",
-      "connected": true,
-      "received_frames": true
-    },
-    "normal_user": {
-      "httpStatus": 403,
-      "code": "dsm_admin_required",
-      "appVisible": false,
-      "policy": "admin-only"
-    },
-    "signed_out": {
-      "dsm_login_visible": true,
-      "app_visible": false,
-      "unauthenticated_api_status": 401
-    },
-    "validated_for_version": "2.37.2-0005",
-    "validated_sdk": "0.44.0",
-    "repeated_for_rebuild": false,
-    "reuse_basis": "Identical application image, container configuration, ingress path, auth rules and path-prefix set; SDK patch only corrects explicit-command dispatch under CGI environment."
-  },
-  "lock_sha256": {
-    "package-lock.json": "7586e8dc988ae4855d35959872a45a558518c2098382630a57d4d6a1bc1a8c72",
-    "tests/entry/go.sum": "ac77edb102c6bde09e3a9fa101334c50d25d1afbe0659bf1e95beb0ea364cdc8"
-  },
-  "device_acceptance_complete": true,
-  "requested_acceptance_complete": true,
-  "scoped_browser_checks_complete": true,
-  "release_smoke_complete": false,
-  "remaining": [],
-  "shared_folder": {
-    "mechanism": "DSM data-share",
-    "selection_variable": "media",
-    "permission": "ro",
-    "package_account": "SynoPkgAudiobookshelf",
-    "generated_upgrade_wizard_checked": true,
-    "interactive_wizard_rerun": false,
-    "fresh_share_without_prior_acl_tested": false,
-    "retained_selection_render_test": true
-  }
+  "review_ready": true,
+  "validation_scope": "Published dependency rebuild, historical baseline inspection, five folder/render regressions and two previous-official upgrades per App; broader suites and two-level fresh installation were not repeated"
 }

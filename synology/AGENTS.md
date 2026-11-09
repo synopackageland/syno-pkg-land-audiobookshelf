@@ -11,8 +11,9 @@ cap_drop ALL, no-new-privileges, read-only rootfs and loopback listeners are req
 Use SDK storage_init for private storage and secret delivery. Configure upstream
 through supported APIs; never edit its database or add another identity service.
 
-Use install.sharedFolder mode dedicated with matching compose.shares select install.
-Default media access is read-only; DSM creates the app-named share and grants
+Use install.sharedFolder mode select and picker folder with matching
+compose.shares select install and picker folder.
+Default media access is read-only; DSM grants
 the package identity RO access. Existing selections authorize DSM data-share
 to grant the declared package-user access. Validate supported folders at installation and kernel access at runtime;
 do not require a pre-existing grant or add an App-side ACL writer.
