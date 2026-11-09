@@ -1,10 +1,11 @@
 # Audiobookshelf for DSM
 
+
 ## Current package
 
-Version **2.37.2-0007** packages unchanged upstream **v2.37.2** with
-SDK/App **0.44.1**, CLI **0.47.1**, templates **0.38.1** and executor
-**v0.39.0**. The App renders the upstream UI and has no SDK UI-kit dependency.
+Version **2.37.2-0011** packages unchanged upstream **v2.37.2** with
+SDK/App **0.53.23**, CLI **0.52.15**, templates **0.41.5** and executor
+**v0.53.5**. The App renders the upstream UI and has no SDK UI-kit dependency.
 Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
 ## Mobile and native clients
@@ -38,7 +39,7 @@ The browser root and `/audiobookshelf/` remain DSM-gated, as does
 existing packaging policy. Existing-token access is the intended boundary;
 mobile OIDC callback/onboarding and complete share HTML flows remain unverified.
 
-DSM package for upstream **v2.37.2**, SPK **2.37.2-0007**, x86_64,
+DSM package for upstream **v2.37.2**, SPK **2.37.2-0011**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
 All package-owned files are under this directory.
 
@@ -50,25 +51,12 @@ ordinary DSM users receive the SDK access-denied page.
 
 ## Media and private storage
 
-The native install wizard defaults to the dedicated **Audiobookshelf** Shared
-Folder. DSM creates it and grants **SynoPkgAudiobookshelf** read access. It is
-mounted **read-only at `/media`**. Create an upstream library using, for example,
-`/media/audiobooks`. Downloading podcasts into this read-only mount is unsupported.
-
-An existing share may be selected instead; the wizard validates its name and
-supported local mounted folder type. Selecting it authorizes DSM's `data-share`
-worker to grant the package account read-only access; no prior package-account
-grant is required. Runtime kernel checks still verify access before startup.
-The container uses that account, not the signed-in user's filesystem ACL.
-Upstream library/user settings control which App users see its mounted data.
-
-The upgrade wizard prefills and submits the saved share. To change it, use that
-wizard, or pass `--param CHANGE_media=true --param media=OtherMedia`. A moved
-share needs another upgrade to resolve its new volume. To end existing streams, stop the
-App before revoking access. Uninstall retains the Shared Folder, source data
-and package account's ACL. Previously selected folders can retain that ACL too. To revoke it, an
-administrator clears only the package account's permission in Control Panel >
-Shared Folder > Edit > Permissions > System internal user, preserving other rows.
+The native install wizard selects an existing media folder at any depth inside
+a supported local ACL shared folder, mounted **read-only at `/media`**.
+DSM grants the package account read access to the whole share. The App does not
+create a share or write ACLs. Private state stays in the existing named volume.
+See [folder selection](docs/folder-picker.md) for the migration and grant boundary.
+Downloading podcasts into this read-only media mount remains unsupported.
 
 The DSM HTTPS server owns the public `/audiobookshelf/` route. There is no
 dedicated public gateway listener or installer port field. The local OIDC issuer
@@ -89,8 +77,8 @@ erasure. No root cleanup hook or alternative ACL helper is shipped.
 
 ## Build and validation
 
-Release pins in `toolchain.json` use SDK/App 0.44.1, CLI 0.47.1,
-templates 0.38.1 and executor/v0.39.0. Builds use the published packages and SDK modules.
+Release pins in `toolchain.json` use SDK/App 0.53.23, CLI 0.52.15,
+templates 0.41.5 and executor/v0.53.5. Builds use the published packages and SDK modules.
 
 On an authorized Linux builder, set `SPL_BUILDER_IMAGE` and
 `SPL_RESOURCE_PREFIX`, then run `python3 scripts/build-linux.py`. It installs the

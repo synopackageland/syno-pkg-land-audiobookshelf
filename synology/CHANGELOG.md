@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.37.2-0011
+
+Select media subfolders with SDK 0.53.23 and CLI 0.52.15; retain existing share selections on upgrade
+
+
 ## 2.37.2-0010
 
 - en: Fix DSM sign-in when opening over HTTP
