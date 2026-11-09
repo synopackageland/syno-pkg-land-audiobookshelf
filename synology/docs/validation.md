@@ -1,5 +1,30 @@
 # Validation scope
 
+## 2.37.2-0012 — SDK 0.53.25 disk scratch
+
+Published SDK/App 0.53.25 and CLI 0.52.16 (range ~0.52.16, locked 0.52.16)
+replace 0.53.23/0.52.15; executor is v0.53.6 and templates remain 0.41.5. The
+rendered Compose no longer declares a `/tmp` tmpfs; `compose.services.web.scratch`
+declares `/tmp` on disk and the environment sets `TMPDIR=/tmp`. The service
+already uses an explicit entrypoint and command. No memory tmpfs remains: the
+upstream needs no socket or lock files in memory. Only `synology/` packaging
+files change; the official image digest is unchanged.
+
+Ten unit/folder/version tests, the Go entry contract, render freshness, check,
+the x86_64 build with the previous official SPK as `--baseline`, and inspect
+with the same baseline pass with no findings. Approval retention remains
+`unknown` (no executor inventory). The generated Compose has no tmpfs and binds
+the package scratch directory at `/tmp`.
+
+One device pass on DSM 7.4.1 upgraded the previous official 2.37.2-0011
+(installed for the test, `/tmp` was tmpfs mode 1777) to 2.37.2-0012. The
+package runs; in the container `/tmp` is a bind of the package scratch
+directory on the btrfs data volume (not tmpfs), mode 0700, owned by the
+package UID/GID, writable, with `TMPDIR=/tmp`. `/healthcheck` returns 200 and a
+DSM administrator reaches the upstream main page through the DSM gateway. The
+test installation and its fixture folder were removed afterwards. Playback,
+media scanning, normal-user denial and other DSM versions were not repeated.
+
 ## 2.37.2-0011 — SDK 0.53.23 folder selection
 
 Published SDK/App 0.53.23 and CLI 0.52.15 (range ~0.52.15, locked 0.52.15)

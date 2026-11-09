@@ -17,14 +17,12 @@
         "METADATA_PATH": "/var/tmp/audiobookshelf/metadata",
         "ROUTER_BASE_PATH": "/audiobookshelf",
         "ABS_OIDC_PORT": "13380",
-        "TZ": "UTC"
+        "TZ": "UTC",
+        "TMPDIR": "/tmp"
       },
       "read_only": true,
       "volumes": [
         "data:/var/tmp"
-      ],
-      "tmpfs": [
-        "/tmp:mode=1777"
       ],
       "restart": "unless-stopped",
       "stop_grace_period": "30s"
