@@ -1,7 +1,7 @@
 {
-  "version": "2.37.2-0012",
+  "version": "2.37.2-0013",
   "toolchain": {
-    "cli": "0.52.16",
+    "cli": "0.53.16",
     "templates": "0.41.5",
     "sdk": "0.53.25",
     "app": "0.53.25",
@@ -10,7 +10,7 @@
     "goToolchain": "go1.26.10"
   },
   "checks": {
-    "tests": true,
+    "tests": false,
     "render_fresh": true,
     "check": true,
     "build_baseline": true,
@@ -22,7 +22,7 @@
   "approval_retention": "unknown",
   "privileges_unchanged": true,
   "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.2-0012-x86_64.spk": "51a7c7d2f62b37d0d906410159a3091c4e5e6f6ba9205173b5b4e65dc8c9f271"
+    "SynoPkgAudiobookshelf-2.37.2-0013-x86_64.spk": "6bcc6719ce5bbff33862aa9c95900b856ef9de726bdd5a6dd1109a2b9fe1c791"
   },
   "temporary_files": {
     "scratch": [
@@ -31,18 +31,13 @@
     "tmpfs": [],
     "TMPDIR": "/tmp"
   },
-  "device": {
-    "dsm": "7.4.1",
-    "upgrade_from": "2.37.2-0011",
-    "running": true,
-    "tmp_on_disk": true,
-    "tmp_mode": "0700",
-    "tmp_owner_package_uid": true,
-    "tmp_writable": true,
-    "healthcheck_200": true,
-    "admin_main_page": true,
-    "cleanup_complete": true
+  "info_change": {
+    "removed": [
+      "instuninst_restart_services"
+    ],
+    "startstop_restart_services": "nginx.service"
   },
+  "device": null,
   "review_ready": true,
-  "validation_scope": "SDK 0.53.25 disk-scratch rebuild: unit/entry tests, render, check, baseline build/inspect and one previous-official upgrade on one DSM 7.4.1 device; broader suites were not repeated"
+  "validation_scope": "CLI 0.53.16 packaging-only rebuild: render freshness, check, baseline build/inspect against 2.37.2-0012, archive comparison and privacy scans; unit tests and device installation were not run"
 }

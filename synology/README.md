@@ -3,8 +3,8 @@
 
 ## Current package
 
-Version **2.37.2-0012** packages unchanged upstream **v2.37.2** with
-SDK/App **0.53.25**, CLI **0.52.16**, templates **0.41.5** and executor
+Version **2.37.2-0013** packages unchanged upstream **v2.37.2** with
+SDK/App **0.53.25**, CLI **0.53.16**, templates **0.41.5** and executor
 **v0.53.6**. The App renders the upstream UI and has no SDK UI-kit dependency.
 Build and device acceptance are recorded in [validation.md](docs/validation.md).
 
@@ -39,7 +39,7 @@ The browser root and `/audiobookshelf/` remain DSM-gated, as does
 existing packaging policy. Existing-token access is the intended boundary;
 mobile OIDC callback/onboarding and complete share HTML flows remain unverified.
 
-DSM package for upstream **v2.37.2**, SPK **2.37.2-0012**, x86_64,
+DSM package for upstream **v2.37.2**, SPK **2.37.2-0013**, x86_64,
 DSM 7.2.1+ with Container Manager. The official image is immutable and unmodified.
 All package-owned files are under this directory.
 
