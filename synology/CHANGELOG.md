@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.37.2-0013
+
+- en: Improve installation reliability in Package Center
+- zh-TW: 提升在套件中心安裝的穩定性
+- zh-CN: 提升在套件中心安装的稳定性
+- ja: パッケージセンターでのインストールの安定性を向上
+- ko: 패키지 센터에서의 설치 안정성 향상
+- de: Zuverlässigkeit der Installation im Paket-Zentrum verbessern
+- fr: Améliorer la fiabilité de l’installation dans le Centre de paquets
+- es: Mejorar la fiabilidad de la instalación en el Centro de paquetes
+- it: Migliorare l’affidabilità dell’installazione nel Centro pacchetti
+
+Rebuilt with CLI 0.53.16, which declares the nginx reload only for start and
+stop; INFO no longer has `instuninst_restart_services`. SDK/App, templates and
+the official image are unchanged.
+
 ## 2.37.2-0012
 
 - en: Keep temporary files on disk instead of memory

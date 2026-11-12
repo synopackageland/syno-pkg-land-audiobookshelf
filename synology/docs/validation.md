@@ -1,5 +1,20 @@
 # Validation scope
 
+## 2.37.2-0013 — CLI 0.53.16 rebuild
+
+Published CLI 0.53.16 (range ~0.53.16, locked 0.53.16) replaces 0.52.16. CLI
+0.53.16 declares the nginx reload only for start and stop, so INFO keeps
+`startstop_restart_services="nginx.service"` and no longer has
+`instuninst_restart_services`; installation no longer reloads nginx while
+Package Center queries package information. SDK/App 0.53.25, templates 0.41.5,
+executor v0.53.6 and the official image digest are unchanged; only `synology/`
+packaging files change.
+
+Packaging-only rebuild: render freshness, check, the x86_64 build and inspect
+against the previous official 2.37.2-0012 SPK pass, followed by an archive
+comparison and privacy scans of current packaging and the generated SPK. Unit
+tests and device installation were not run.
+
 ## 2.37.2-0012 — SDK 0.53.25 disk scratch
 
 Published SDK/App 0.53.25 and CLI 0.52.16 (range ~0.52.16, locked 0.52.16)
