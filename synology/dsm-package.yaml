@@ -1,12 +1,12 @@
 schema: 2
 package: SynoPkgAudiobookshelf
-version: 2.37.2
-build: 13
+version: 2.38.0
+build: 1
 displayname: Audiobookshelf
 description: Organize and listen to your audiobooks and podcasts
 maintainer: advplyr
 metadata:
-  changelog: {"en": "Improve installation reliability in Package Center", "zh-TW": "提升在套件中心安裝的穩定性", "zh-CN": "提升在套件中心安装的稳定性", "ja": "パッケージセンターでのインストールの安定性を向上", "ko": "패키지 센터에서의 설치 안정성 향상", "de": "Zuverlässigkeit der Installation im Paket-Zentrum verbessern", "fr": "Améliorer la fiabilité de l’installation dans le Centre de paquets", "es": "Mejorar la fiabilidad de la instalación en el Centro de paquetes", "it": "Migliorare l’affidabilità dell’installazione nel Centro pacchetti"}
+  changelog: {"en": "Update to Audiobookshelf 2.38.0 with library scan and access control fixes", "zh-TW": "更新至 Audiobookshelf 2.38.0，修正媒體庫掃描與存取控制問題", "zh-CN": "更新至 Audiobookshelf 2.38.0，修复媒体库扫描与访问控制问题", "ja": "Audiobookshelf 2.38.0 に更新（ライブラリースキャンとアクセス制御の問題を修正）", "ko": "Audiobookshelf 2.38.0으로 업데이트(라이브러리 스캔 및 액세스 제어 문제 수정)", "de": "Auf Audiobookshelf 2.38.0 mit Korrekturen für Bibliotheksscan und Zugriffskontrolle aktualisieren", "fr": "Mise à jour vers Audiobookshelf 2.38.0 avec corrections de l’analyse de bibliothèque et du contrôle d’accès", "es": "Actualización a Audiobookshelf 2.38.0 con correcciones del análisis de la biblioteca y del control de acceso", "it": "Aggiornamento a Audiobookshelf 2.38.0 con correzioni alla scansione della libreria e al controllo degli accessi"}
   maintainer_url: https://github.com/advplyr/audiobookshelf
   distributor: Syno Package Land
   distributor_url: https://synopkgland.com/

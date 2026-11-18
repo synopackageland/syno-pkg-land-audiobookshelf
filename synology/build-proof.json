@@ -1,5 +1,5 @@
 {
-  "version": "2.37.2-0013",
+  "version": "2.38.0-0001",
   "toolchain": {
     "cli": "0.53.16",
     "templates": "0.41.5",
@@ -22,7 +22,7 @@
   "approval_retention": "unknown",
   "privileges_unchanged": true,
   "artifacts": {
-    "SynoPkgAudiobookshelf-2.37.2-0013-x86_64.spk": "6bcc6719ce5bbff33862aa9c95900b856ef9de726bdd5a6dd1109a2b9fe1c791"
+    "SynoPkgAudiobookshelf-2.38.0-0001-x86_64.spk": "1ec19dce5bcde67af912d020d03fca16a5a9f09b36ba3c5b22a8402197c2992e"
   },
   "temporary_files": {
     "scratch": [
@@ -31,13 +31,12 @@
     "tmpfs": [],
     "TMPDIR": "/tmp"
   },
-  "info_change": {
-    "removed": [
-      "instuninst_restart_services"
-    ],
-    "startstop_restart_services": "nginx.service"
-  },
   "device": null,
   "review_ready": true,
-  "validation_scope": "CLI 0.53.16 packaging-only rebuild: render freshness, check, baseline build/inspect against 2.37.2-0012, archive comparison and privacy scans; unit tests and device installation were not run"
+  "validation_scope": "Upstream v2.38.0 upgrade: render freshness, check, baseline build/inspect against 2.37.2-0013 and privacy scans; unit tests, browser tests and device installation were not run",
+  "upstream": {
+    "tag": "v2.38.0",
+    "commit": "1430c9fc642d586ff91c8d4cbed20aab2c47e473",
+    "image": "docker.io/advplyr/audiobookshelf:2.38.0@sha256:60064c23f32fd9099fd39e82c5132c51701d1221135bbca04cd099b589e1edc3"
+  }
 }
