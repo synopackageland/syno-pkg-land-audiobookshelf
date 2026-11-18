@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.38.0-0001
+
+- en: Update to Audiobookshelf 2.38.0 with library scan and access control fixes
+- zh-TW: 更新至 Audiobookshelf 2.38.0，修正媒體庫掃描與存取控制問題
+- zh-CN: 更新至 Audiobookshelf 2.38.0，修复媒体库扫描与访问控制问题
+- ja: Audiobookshelf 2.38.0 に更新（ライブラリースキャンとアクセス制御の問題を修正）
+- ko: Audiobookshelf 2.38.0으로 업데이트(라이브러리 스캔 및 액세스 제어 문제 수정)
+- de: Auf Audiobookshelf 2.38.0 mit Korrekturen für Bibliotheksscan und Zugriffskontrolle aktualisieren
+- fr: Mise à jour vers Audiobookshelf 2.38.0 avec corrections de l’analyse de bibliothèque et du contrôle d’accès
+- es: Actualización a Audiobookshelf 2.38.0 con correcciones del análisis de la biblioteca y del control de acceso
+- it: Aggiornamento a Audiobookshelf 2.38.0 con correzioni alla scansione della libreria e al controllo degli accessi
+
+Upstream upgrade to Audiobookshelf v2.38.0 (official image
+`docker.io/advplyr/audiobookshelf:2.38.0@sha256:60064c23f32fd9099fd39e82c5132c51701d1221135bbca04cd099b589e1edc3`; the amd64 and arm64 revision labels match the tag
+commit `1430c9fc`). Upstream fixes server crashes during library scans and book
+saves and tightens access checks for playback sessions, media progress,
+libraries, tags, collections and socket events. The upstream tag is merged
+into the fork without changes to upstream files. SDK/App 0.53.25, CLI 0.53.16,
+templates 0.41.5 and the packaging are unchanged.
+
 ## 2.37.2-0013
 
 - en: Improve installation reliability in Package Center

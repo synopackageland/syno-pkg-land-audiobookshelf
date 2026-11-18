@@ -1,8 +1,8 @@
 {
-  "tag": "v2.37.2",
-  "commit": "edb1f7efc92ecacdef51aafb4d9d5054ce10604f",
-  "source_tree": "666720e07a48f0d3ea1e84c318793af60b6dfd95",
-  "checkout_commit": "96c549fd6ba0d912a6d66271fa1620e72e6bb8f9",
-  "build": 11,
+  "tag": "v2.38.0",
+  "commit": "1430c9fc642d586ff91c8d4cbed20aab2c47e473",
+  "source_tree": "f7280279b99d0fc1e7e8ba7d9758e038f2ecc591",
+  "checkout_commit": "8b03d22876a42be8b99167508e2af516a79fc448",
+  "build": 1,
   "checkout_note": "The existing fork main follows upstream master beyond this release. Packaging does not change that upstream tree; the official image uses the exact release commit."
 }

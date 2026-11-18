@@ -1,5 +1,20 @@
 # Validation scope
 
+## 2.38.0-0001 — upstream v2.38.0
+
+Upstream upgrade to Audiobookshelf v2.38.0 (official image
+`docker.io/advplyr/audiobookshelf:2.38.0@sha256:60064c23f32fd9099fd39e82c5132c51701d1221135bbca04cd099b589e1edc3`; the amd64 and arm64 revision labels match the tag
+commit `1430c9fc`). Upstream fixes server crashes during library scans and book
+saves and tightens access checks for playback sessions, media progress,
+libraries, tags, collections and socket events. The upstream tag is merged
+into the fork without changes to upstream files. SDK/App 0.53.25, CLI 0.53.16,
+templates 0.41.5 and the packaging are unchanged.
+
+Upgrade release: render freshness, check, the x86_64 build and inspect
+against the previous official 2.37.2-0013 SPK, followed by privacy scans of
+current packaging and the generated SPK. Unit tests, browser tests and device
+installation were not run.
+
 ## 2.37.2-0013 — CLI 0.53.16 rebuild
 
 Published CLI 0.53.16 (range ~0.53.16, locked 0.53.16) replaces 0.52.16. CLI
